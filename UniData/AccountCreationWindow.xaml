@@ -1,0 +1,62 @@
+﻿<Window x:Class="UniData.AccountCreationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UniData"
+        mc:Ignorable="d"
+        Title="AccountCreationWindow" Height="450" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Username field -->
+        <Label Content="Username: " FontSize="12pt" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="UsernameTextBox" FontSize="12pt" Grid.Column="1" Grid.Row="0" Width="auto" Height="30px" Margin="20px" />
+        <Label x:Name="UsernameErrorMsg" Content="Error" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+
+        <!-- Password field -->
+        <Label Content="Password: " FontSize="12pt" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <PasswordBox x:Name="UserPaswordBox" FontSize="12pt" Grid.Column="1" Grid.Row="2" Width="auto" Height="30px" Margin="20px"/>
+        <Label x:Name="PasswordErrorMsg" Content="Error" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+        
+        <!-- Confirm Password field -->
+        <Label Content="Confirm Password: " FontSize="12pt" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <PasswordBox x:Name="ConfirmPasswordBox" FontSize="12pt" Grid.Column="1" Grid.Row="4" Width="auto" Height="30px" Margin="20px"/>
+        <Label x:Name="ConfirmPWErrorMsg" Content="Error" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+
+        <!-- First Name field -->
+        <Label Content="First Name: " FontSize="12pt" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="FirstNameTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="0" Width="auto" Height="30px" Margin="20px" />
+        <Label x:Name="FirstNameErrorMsg" Content="Error" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+        
+        <!-- Last Name field -->
+        <Label Content="Last Name: " FontSize="12pt" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="LastNameTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="2" Width="auto" Height="30px" Margin="20px" />
+        <Label x:Name="LastNameErrorMsg" Content="Error" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+
+        <!-- Email field -->
+        <Label Content="Email Address: " FontSize="12pt" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="EmailTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="4" Width="auto" Height="30px" Margin="20px" />
+        <Label x:Name="EmailErrorMsg" Content="Error" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+
+        <!-- Buttons - SubmitButton is set as default when enter key is pressed -->
+        <Label x:Name="GeneralErrorMsg" Content="Error" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+        <Button x:Name="SubmitButton" Content="Submit" FontSize="12pt" Grid.Column="2" Grid.Row="6" Width="auto" Height="40px" Margin="20px" IsDefault="True" Click="SubmitButtonClick"/>
+        <Button x:Name="CancelButton" Content="Cancel" FontSize="12pt" Grid.Column="3" Grid.Row="6" Width="auto" Height="40px" Margin="20px" Click="CancelButtonClick"/>
+
+    </Grid>
+</Window>

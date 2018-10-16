@@ -1,0 +1,38 @@
+﻿<Window x:Class="UniData.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UniData"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="270" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Username field -->
+        <Label Content="Username: " FontSize="12pt" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="UsernameTextBox" FontSize="12pt" Grid.Column="1" Grid.Row="0" Width="auto" Height="30px" Margin="20px" />
+
+        <!-- Password field -->
+        <Label Content="Password: " FontSize="12pt" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <PasswordBox x:Name="UserPaswordBox" FontSize="12pt" Grid.Column="1" Grid.Row="1" Width="auto" Height="30px" Margin="20px"/>
+
+        <!-- Error Label - Set to be invisible by default-->
+        <Label x:Name="ErrorMsg" Content="Error" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+
+        <!-- Buttons - LoginButton is set as default when enter key is pressed -->
+        <Button x:Name="LoginButton" Content="Sign in" FontSize="12pt" Grid.Column="1" Grid.Row="3" Width="auto" Height="40px" Margin="10px" IsDefault="True" Click="LoginButtonClick"/>
+        <Button x:Name="CreateAccountButton" Content="Create Account" FontSize="12pt" Grid.Column="0" Grid.Row="3" Width="auto" Height="40px" Margin="10px" Click="CreateAccountButtonClick"/>
+      
+
+    </Grid>
+</Window>

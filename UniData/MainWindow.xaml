@@ -1,0 +1,65 @@
+﻿<Window x:Class="UniData.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UniData"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" VerticalAlignment="Top" Width="800">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Logged in as [blank]">
+                    <MenuItem Header="Edit Account (Tentative)"/>
+                    <MenuItem Header="Logout" />
+                </MenuItem>
+                <MenuItem Header="File">
+                    <MenuItem Header="New Database"/>
+                    <MenuItem Header="Load Existing Database"/>
+                    <MenuItem Header="Save Database"/>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Add to Database" Click="AddToDatabaseClick"/>
+                    <MenuItem Header="Delete Selected Row"/>
+                    <MenuItem Header="Delete Specific Row"/>
+                    <MenuItem Header="Delete Column"/>
+                    <MenuItem Header="Sort Database"/>
+                </MenuItem>
+                <MenuItem Header="Search"/>
+                <MenuItem Header="Settings (Tentative)"/>
+            </Menu>
+        </DockPanel>
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto">
+            <ListView.View>
+                <GridView>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add Row"/>
+                    <MenuItem Header="Add Column"/>
+                    <MenuItem Header="Delete Selected Row"/>
+                    <MenuItem Header="Delete Specific Row"/>
+                    <MenuItem Header="Delete Column"/>
+                    <MenuItem Header="Sort Database"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+    </Grid>
+</Window>
