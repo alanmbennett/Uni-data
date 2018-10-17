@@ -5,20 +5,27 @@ using System.Net.Mail;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace UniData
 {
+    [XmlRoot(ElementName = "UserAccount")]
     public class UserAccount
     {
+        [XmlAttribute(DataType ="string")]
         public string FirstName { get; set; }
+        [XmlAttribute(DataType = "string")]
         public string LastName { get; set; }
+        [XmlAttribute(DataType = "string")]
         public string Username { get; set; }
+        [XmlAttribute(DataType = "string")]
         public MailAddress Email { get; set; }
-        public SecureString Password { get; set; }  // SecureString for password security
+        [XmlAttribute(DataType = "string")]
+        public string Password { get; set; } 
 
         UserAccount() { }
 
-        public UserAccount(string firstName, string lastName, string username, string email, SecureString password)
+        public UserAccount(string firstName, string lastName, string username, string email, string password)
         {
             FirstName = firstName;
             LastName = lastName;
