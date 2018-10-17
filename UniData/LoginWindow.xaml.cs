@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,7 +34,8 @@ namespace UniData
         private void LoginButtonClick(object sender, RoutedEventArgs e)
         {
             /* Insert code here that checks login credentials before opening the MainWindow*/
-            MainWindow main = new MainWindow();
+            // Hard-coded test user is tentative code so program doesn't crash for now
+            MainWindow main = new MainWindow(new UserAccount("Test", "Tester","Testing21", "testing@gmail.com", new SecureString()));
             this.Close();
             main.ShowDialog();
         }
