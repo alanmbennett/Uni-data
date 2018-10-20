@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace UniData
 {
@@ -20,9 +22,21 @@ namespace UniData
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private const string userFilePath = "login.xml";
+        private XmlSerializer Serializer = new XmlSerializer(typeof(List<UserAccount>));
+        private List<UserAccount> userList; 
+
         public LoginWindow()
         {
+            ReadUsersFromFile(); // read users from XML file
             InitializeComponent();
+        }
+
+        public LoginWindow(string lastUsername)
+        {
+            ReadUsersFromFile(); // read users from XML file
+            InitializeComponent();
+            UsernameTextBox.Text = lastUsername;
         }
 
         private void CreateAccountButtonClick(object sender, RoutedEventArgs e)
@@ -35,9 +49,39 @@ namespace UniData
         {
             /* Insert code here that checks login credentials before opening the MainWindow*/
             // Hard-coded test user is tentative code so program doesn't crash for now
-            MainWindow main = new MainWindow(new UserAccount("Test", "Tester","Testing21", "testing@gmail.com", new SecureString()));
-            this.Close();
-            main.ShowDialog();
+            UserAccount currentUser;
+
+            try
+            {
+                currentUser = userList.Find(u => u.Username == UsernameTextBox.Text && u.Password == UserPaswordBox.Password);
+                MainWindow main = new MainWindow(new UserAccount("Test", "Tester", "Testing21", "testing@gmail.com", "password"));
+                this.Close();
+                main.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+            }
+        }
+
+        /* Method: ReadUsersFromFile
+         * Parameters: n/a
+         * Return: void
+         * Description: Reads users from file and adds them to userList, will intialize userList if file does not exists yet,
+         *              will also create login.xml for future reference.
+         */
+
+        private void ReadUsersFromFile()
+        {
+            bool fileExists = File.Exists(userFilePath);
+            bool fileEmpty = new FileInfo(userFilePath).Length == 0;
+
+            using (FileStream filestream = new FileStream(userFilePath, FileMode.OpenOrCreate, FileAccess.Read))
+            {
+                if (fileExists && !fileEmpty)
+                    userList = Serializer.Deserialize(filestream) as List<UserAccount>;
+                else
+                    userList = new List<UserAccount>();
+            }
         }
     }
 }

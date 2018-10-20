@@ -21,11 +21,14 @@ namespace UniData
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    { 
+    {
+        UserAccount User;
+
         public MainWindow(UserAccount user)
         { 
             InitializeComponent();
             UserMenuItem.Header = $"Logged in as: {user.Username}";
+            User = user;
 
         }
 
@@ -47,6 +50,13 @@ namespace UniData
 
                 }*/
             }
+        }
+
+        private void LogoutClick(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWin = new LoginWindow(User.Username);
+            this.Close();
+            loginWin.ShowDialog();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace UniData
         [XmlAttribute(DataType = "string")]
         public string Username { get; set; }
         [XmlAttribute(DataType = "string")]
-        public MailAddress Email { get; set; }
+        public string Email { get; set; }
         [XmlAttribute(DataType = "string")]
         public string Password { get; set; } 
 
@@ -30,7 +30,7 @@ namespace UniData
             FirstName = firstName;
             LastName = lastName;
             Username = username;
-            Email = new MailAddress(email); // throws exceptions if not valid email address so surround constructor calls in try-catches
+            Email = (new MailAddress(email)).ToString(); // throws exceptions if not valid email address so surround constructor calls in try-catches
             Password = password;
         }
     }

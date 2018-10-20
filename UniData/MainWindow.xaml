@@ -25,8 +25,8 @@
         </Grid.ColumnDefinitions>
         <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" VerticalAlignment="Top" Width="800">
             <Menu DockPanel.Dock="Top">
-                <MenuItem x:Name="UserMenuItem" Header="{Binding userMenuText}">
-                    <MenuItem Header="Logout" />
+                <MenuItem x:Name="UserMenuItem" >
+                    <MenuItem Header="Logout" Click="LogoutClick" />
                 </MenuItem>
                 <MenuItem Header="File">
                     <MenuItem Header="New Database"/>
