@@ -58,5 +58,11 @@ namespace UniData
             this.Close();
             loginWin.ShowDialog();
         }
+
+        private void CreateDatabaseClick(object sender, RoutedEventArgs e)
+        {
+            DatabaseCreationWindow createWin = new DatabaseCreationWindow();
+            createWin.ShowDialog();
+        }
     }
 }

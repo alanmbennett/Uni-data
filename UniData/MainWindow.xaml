@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniData"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
+        Title="Blank Database" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -29,7 +29,7 @@
                     <MenuItem Header="Logout" Click="LogoutClick" />
                 </MenuItem>
                 <MenuItem Header="File">
-                    <MenuItem Header="New Database"/>
+                    <MenuItem Header="New Database" Click="CreateDatabaseClick"/>
                     <MenuItem Header="Load Existing Database" Click="LoadDatabaseClick"/>
                     <MenuItem Header="Save Database"/>
                 </MenuItem>
@@ -42,7 +42,6 @@
                     <MenuItem Header="Sort Database"/>
                 </MenuItem>
                 <MenuItem Header="Search"/>
-                <MenuItem Header="Settings (Tentative)"/>
             </Menu>
         </DockPanel>
         <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto">

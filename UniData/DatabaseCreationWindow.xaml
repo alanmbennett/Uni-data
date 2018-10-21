@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniData"
         mc:Ignorable="d"
-        Title="DatabaseCreationWindow" Height="450" Width="800">
+        Title="Create Your Database" Height="200" Width="500">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Name of database field -->
+        <Label Content="Name of Database: " FontSize="12pt" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="DatabaseNameTextBox" FontSize="12pt" Grid.Column="1" Grid.Row="0" Width="auto" Height="30px" Margin="20px" />
+        <Label x:Name="NameErrorMsg" Content="Error" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+
+        <!-- Buttons - SubmitButton is set as default when enter key is pressed -->
         
+        <Button x:Name="SubmitButton" Content="Submit" FontSize="12pt" Grid.Column="0" Grid.Row="9" Width="auto" Height="40px" Margin="20px" IsDefault="True" />
+        <Button x:Name="CancelButton" Content="Cancel" FontSize="12pt" Grid.Column="1" Grid.Row="9" Width="auto" Height="40px" Margin="20px"/>
+
+
+
+
     </Grid>
 </Window>
