@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,17 @@ namespace UniData
     /// </summary>
     public partial class DatabaseCreationWindow : Window
     {
-        public DatabaseCreationWindow()
+        MainWindow MainWin;
+        public DatabaseCreationWindow(MainWindow mw)
         {
+            MainWin = mw;
             InitializeComponent();
         }
 
-
+        private void CreateButtonClick(object sender, RoutedEventArgs e)
+        {
+            MainWin.SaveDatabase(DatabaseNameTextBox.Text);
+            this.Close();
+        }
     }
 }

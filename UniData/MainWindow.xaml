@@ -31,7 +31,7 @@
                 <MenuItem Header="File">
                     <MenuItem Header="New Database" Click="CreateDatabaseClick"/>
                     <MenuItem Header="Load Existing Database" Click="LoadDatabaseClick"/>
-                    <MenuItem Header="Save Database"/>
+                    <MenuItem Header="Save Database" Click="SaveDatabaseClick"/>
                 </MenuItem>
                 <MenuItem Header="Edit">
                     <MenuItem Header="Add Row" />

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows;
 
 namespace UniData
 {
@@ -22,14 +24,17 @@ namespace UniData
     /// </summary>
     public partial class MainWindow : Window
     {
-        UserAccount User;
+        private UserAccount User;
+        private string fileFilter = "XML Files(*.xml)|*.xml";
+        private string dbName;
+        private SaveFileDialog saveDialog;
 
         public MainWindow(UserAccount user)
         { 
             InitializeComponent();
             UserMenuItem.Header = $"Logged in as: {user.Username}";
             User = user;
-
+            dbName = null;
         }
 
         private void AddToDatabaseClick(object sender, RoutedEventArgs e)
@@ -41,7 +46,7 @@ namespace UniData
         private void LoadDatabaseClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "XML Files(*.xml)|*.xml";
+            fileDialog.Filter = fileFilter;
             
             if(fileDialog.ShowDialog() == true)
             {
@@ -61,8 +66,37 @@ namespace UniData
 
         private void CreateDatabaseClick(object sender, RoutedEventArgs e)
         {
-            DatabaseCreationWindow createWin = new DatabaseCreationWindow();
+            DatabaseCreationWindow createWin = new DatabaseCreationWindow(this);
             createWin.ShowDialog();
+        }
+
+        private void SaveDatabaseClick(object sender, RoutedEventArgs e)
+        {
+            SaveDatabase();
+        }
+
+        public void SaveDatabase(string name = null)
+        {
+            saveDialog = new SaveFileDialog();
+            saveDialog.Filter = fileFilter;
+            saveDialog.Title = "Save a Database";
+            if(name != null)
+                saveDialog.FileName = $"{name}.xml";
+            else if(name == null && dbName != null)
+                saveDialog.FileName = $"{dbName}.xml";
+
+            saveDialog.ShowDialog();
+        }
+
+        /* Method: SaveDialogFileOK
+         * Description: Event handler for when user presses Save button on SaveFileDialog window
+         * CURRENTLY DOES NOT WORK CORRECTLY
+         */
+
+        private void SaveDialogFileOK(object sender, CancelEventArgs e)
+        {
+            this.dbName = saveDialog.FileName;
+            this.Title = dbName;
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniData"
         mc:Ignorable="d"
-        Title="Create Your Database" Height="200" Width="500">
+        Title="Create Your Database" Height="210" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -24,7 +24,7 @@
 
         <!-- Buttons - SubmitButton is set as default when enter key is pressed -->
         
-        <Button x:Name="SubmitButton" Content="Submit" FontSize="12pt" Grid.Column="0" Grid.Row="9" Width="auto" Height="40px" Margin="20px" IsDefault="True" />
+        <Button x:Name="CreateButton" Content="Create Database" FontSize="12pt" Grid.Column="0" Grid.Row="9" Width="auto" Height="40px" Margin="20px" IsDefault="True" Click="CreateButtonClick" />
         <Button x:Name="CancelButton" Content="Cancel" FontSize="12pt" Grid.Column="1" Grid.Row="9" Width="auto" Height="40px" Margin="20px"/>
 
 
