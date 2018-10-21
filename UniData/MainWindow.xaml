@@ -25,7 +25,7 @@
         </Grid.ColumnDefinitions>
         <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" VerticalAlignment="Top" Width="800">
             <Menu DockPanel.Dock="Top">
-                <MenuItem x:Name="UserMenuItem" >
+                <MenuItem x:Name="UserMenuItem" Margin="0,0,10,0">
                     <MenuItem Header="Logout" Click="LogoutClick" />
                 </MenuItem>
                 <MenuItem Header="File">
@@ -34,8 +34,8 @@
                     <MenuItem Header="Save Database" Click="SaveDatabaseClick"/>
                 </MenuItem>
                 <MenuItem Header="Edit">
-                    <MenuItem Header="Add Row" />
-                    <MenuItem Header="Add Column"/>
+                    <MenuItem Header="Add Row" Click="AddRowClick"/>
+                    <MenuItem Header="Add Column" Click="AddColumnClick"/>
                     <MenuItem Header="Delete Selected Row"/>
                     <MenuItem Header="Delete Specific Row"/>
                     <MenuItem Header="Delete Column"/>

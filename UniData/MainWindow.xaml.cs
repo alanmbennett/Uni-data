@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows;
+using System.Data;
 
 namespace UniData
 {
@@ -28,19 +29,15 @@ namespace UniData
         private string fileFilter = "XML Files(*.xml)|*.xml";
         private string dbName;
         private SaveFileDialog saveDialog;
+        private DataTable database;
 
         public MainWindow(UserAccount user)
-        { 
+        {
             InitializeComponent();
             UserMenuItem.Header = $"Logged in as: {user.Username}";
             User = user;
             dbName = null;
-        }
-
-        private void AddToDatabaseClick(object sender, RoutedEventArgs e)
-        {
-            InputWindow inputWin = new InputWindow();
-            inputWin.ShowDialog();
+            database = new DataTable();
         }
 
         private void LoadDatabaseClick(object sender, RoutedEventArgs e)
@@ -97,6 +94,20 @@ namespace UniData
         {
             this.dbName = saveDialog.FileName;
             this.Title = dbName;
+            database.WriteXml(dbName); // will write database to XML file specified in SaveFileDialog
         }
+
+        private void AddColumnClick(object sender, RoutedEventArgs e)
+        {
+            InputWindow inputWin = new InputWindow(DatabaseHelper.Input.Columns); // specifies adding column
+            inputWin.ShowDialog();
+        }
+
+        private void AddRowClick(object sender, RoutedEventArgs e)
+        {
+            InputWindow inputWin = new InputWindow(DatabaseHelper.Input.Rows); // specifies adding row
+            inputWin.ShowDialog();
+        }
+
     }
 }

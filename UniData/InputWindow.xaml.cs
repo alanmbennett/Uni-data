@@ -17,11 +17,18 @@ namespace UniData
     /// <summary>
     /// Interaction logic for InputWindow.xaml
     /// </summary>
+    /// 
+
     public partial class InputWindow : Window
     {
-        public InputWindow()
+        DatabaseHelper.Input Input; 
+
+        public InputWindow(DatabaseHelper.Input input)
         {
+            Input = input;
             InitializeComponent();
         }
+
+
     }
 }

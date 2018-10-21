@@ -23,8 +23,13 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+       
+        <!-- Scroll bar? -->
+        <ScrollViewer HorizontalAlignment="Right" Height="auto" Grid.RowSpan="6" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Width="auto"/>
         
         
+
+
 
 
     </Grid>
