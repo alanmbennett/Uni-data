@@ -41,7 +41,7 @@ namespace UniData
 
         private void CreateAccountButtonClick(object sender, RoutedEventArgs e)
         {
-            AccountCreationWindow accWin = new AccountCreationWindow();
+            AccountCreationWindow accWin = new AccountCreationWindow(userList);
             accWin.ShowDialog();
         }
 
@@ -60,6 +60,9 @@ namespace UniData
             }
             catch(Exception ex)
             {
+
+				Console.WriteLine(ex);
+
             }
         }
 
@@ -72,16 +75,17 @@ namespace UniData
 
         private void ReadUsersFromFile()
         {
-            bool fileExists = File.Exists(userFilePath);
-
-			if (fileExists)
+			//validate if the user file exists
+            if (File.Exists(userFilePath))
 			{
+				//read in the file if it exists
 				using (FileStream filestream = new FileStream(userFilePath, FileMode.Open, FileAccess.Read))
 				{
 					userList = Serializer.Deserialize(filestream) as List<UserAccount>;
 				}
 			}else
 			{
+				//generate a empty user list
 				userList = new List<UserAccount>();
 			}
 
