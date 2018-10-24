@@ -73,15 +73,18 @@ namespace UniData
         private void ReadUsersFromFile()
         {
             bool fileExists = File.Exists(userFilePath);
-            bool fileEmpty = new FileInfo(userFilePath).Length == 0;
 
-            using (FileStream filestream = new FileStream(userFilePath, FileMode.OpenOrCreate, FileAccess.Read))
-            {
-                if (fileExists && !fileEmpty)
-                    userList = Serializer.Deserialize(filestream) as List<UserAccount>;
-                else
-                    userList = new List<UserAccount>();
-            }
-        }
+			if (fileExists)
+			{
+				using (FileStream filestream = new FileStream(userFilePath, FileMode.Open, FileAccess.Read))
+				{
+					userList = Serializer.Deserialize(filestream) as List<UserAccount>;
+				}
+			}else
+			{
+				userList = new List<UserAccount>();
+			}
+
+		}
     }
 }
