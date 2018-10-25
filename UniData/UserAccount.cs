@@ -32,6 +32,12 @@ namespace UniData
             Username = username;
             Email = (new MailAddress(email)).ToString(); // throws exceptions if not valid email address so surround constructor calls in try-catches
             Password = password;
-        }
-    }
+
+		}
+
+		public override string ToString()
+		{
+			return $"{Username}:{FirstName}, {LastName}";
+		}
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using System.Net.Mail;
 
 namespace UniData
 {
@@ -20,6 +23,8 @@ namespace UniData
     public partial class AccountCreationWindow : Window
     {
 
+		private const string userFilePath = "login.xml";
+		private XmlSerializer Serializer = new XmlSerializer(typeof(List<UserAccount>));
 		private List<UserAccount> userList;
 
 		public AccountCreationWindow(List<UserAccount> userAccounts)
@@ -27,6 +32,14 @@ namespace UniData
             InitializeComponent();
 			userList = userAccounts;
         }
+
+		private void WriteFile()
+		{
+			using (FileStream filestream = new FileStream(userFilePath, FileMode.Create, FileAccess.Write))
+			{
+				Serializer.Serialize(filestream, userList);
+			}
+		}
 
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
@@ -38,14 +51,15 @@ namespace UniData
 			//validate input
 			if (InputValidation())
 			{
-
-				//validate if account exists
 				//create user and exit
+				userList.Add(new UserAccount(FirstNameTextBox.Text, LastNameTextBox.Text, UsernameTextBox.Text, EmailTextBox.Text, UserPasswordBox.Password));
+				WriteFile();
+				this.Close();
 			}
 			else
 			{
 				//trigger what input is invalid
-				MessageBox.Show("Input is invalid");
+				//MessageBox.Show("Input is invalid");
 			}
         }
 
@@ -58,7 +72,13 @@ namespace UniData
 			{
 				output = false;
 				UsernameErrorMsg.Visibility = Visibility.Visible;
+			}else if (userList.Any(x => x.Username == UsernameTextBox.Text))//Checks if the user already exists
+			{
+				output = false;
+				UsernameErrorMsg.Visibility = Visibility.Visible;
+				MessageBox.Show("User exists in the System Use a different Username or login with that Username");
 			}
+
 			if (string.IsNullOrWhiteSpace(UserPasswordBox.Password))
 			{
 				output = false;
@@ -85,17 +105,19 @@ namespace UniData
 				output = false;
 				LastNameErrorMsg.Visibility = Visibility.Visible;
 			}
-			if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
+			try
 			{
+				MailAddress t = new MailAddress(EmailTextBox.Text);
+			}
+			catch{
 				output = false;
 				EmailErrorMsg.Visibility = Visibility.Visible;
 			}
-
-
 			return output;
 
 		}
 
+		//Error reseting
 		private void UsernameTextBoxFocus(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			UsernameErrorMsg.Visibility = Visibility.Hidden;
@@ -126,5 +148,8 @@ namespace UniData
 		{
 			EmailErrorMsg.Visibility = Visibility.Hidden;
 		}
+
+
+
 	}
 }
