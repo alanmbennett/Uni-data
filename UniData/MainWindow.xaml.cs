@@ -45,9 +45,22 @@ namespace UniData
 
             database.Rows.Add("Alan", "Bennett", 24);
 
-            DatabaseGrid.CanUserAddRows = false; 
+            DatabaseGrid.CanUserAddRows = false;
             DatabaseGrid.DataContext = database.DefaultView;
         }
+
+        public MainWindow(UserAccount user, DataTable data)
+        {
+            InitializeComponent();
+            UserMenuItem.Header = $"Logged in as: {user.Username}";
+            User = user;
+            dbName = null;
+            database = data;
+
+            DatabaseGrid.CanUserAddRows = false;
+            DatabaseGrid.DataContext = database.DefaultView;
+        }
+
 
         private void LoadDatabaseClick(object sender, RoutedEventArgs e)
         {
@@ -128,6 +141,33 @@ namespace UniData
             try
             {
                 database.Rows.Remove(toDelete);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "An error has occured!");
+            }
+        }
+
+        private void DeleteColumnClick(object sender, RoutedEventArgs e)
+        {
+            DeleteWindow deleteWin = new DeleteWindow(DatabaseHelper.Input.Columns);
+            deleteWin.ShowDialog();
+
+            if(!string.IsNullOrWhiteSpace(deleteWin.DeletionTextbox.Text))
+            {
+                DeleteColumn(database.Columns[deleteWin.DeletionTextbox.Text]);
+
+                /* Below code ensures that deleted column is no longer displayed in DataGrid */
+                DatabaseGrid.DataContext = null;
+                DatabaseGrid.DataContext = database.DefaultView;
+            }
+        }
+
+        private void DeleteColumn(DataColumn toDelete)
+        {
+            try
+            {
+                database.Columns.Remove(toDelete);
             }
             catch(Exception ex)
             {

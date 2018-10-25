@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniData"
         mc:Ignorable="d"
-        Title="DeleteWindow" Height="450" Width="800">
+        Title="DeleteWindow" Height="200" Width="400">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="TextboxLabel" Content="Column name" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" />
+        <TextBox x:Name="DeletionTextbox" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Width="100" Margin="20" TextChanged="UpdateErrorMessage"/>
+        <Label x:Name="ErrorMessage" Content="Error" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Foreground="Red" Visibility="Hidden"/>
+        <Button x:Name="DeleteButton" Content="Delete" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Height="30" Width="100" Click="DeleteClick"/>
+        <Button x:Name="CancelButton" Content="Cancel" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Height="30" Width="100"/>
     </Grid>
 </Window>

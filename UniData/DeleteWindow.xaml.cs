@@ -19,9 +19,43 @@ namespace UniData
     /// </summary>
     public partial class DeleteWindow : Window
     {
-        public DeleteWindow()
+        DatabaseHelper.Input Input;
+
+        public DeleteWindow(DatabaseHelper.Input input)
         {
+            Input = input;
             InitializeComponent();
+
+            if(Input == DatabaseHelper.Input.Columns)
+            {
+                TextboxLabel.Content = "Column Name ";
+            }
+            else if (Input == DatabaseHelper.Input.Rows)
+            {
+                TextboxLabel.Content = "Row ID ";
+            }
         }
+
+        private void DeleteClick(object sender, RoutedEventArgs e)
+        {
+            if(!string.IsNullOrWhiteSpace(DeletionTextbox.Text))
+                this.Close();
+            else
+            {
+                ErrorMessage.Content = "Error: Unable to delete based on parameter given.";
+                ErrorMessage.Visibility = Visibility.Visible; 
+            }
+
+        }
+
+        private void UpdateErrorMessage(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(DeletionTextbox.Text))
+                ErrorMessage.Visibility = Visibility.Hidden;
+        }
+
+
+
+
     }
 }
