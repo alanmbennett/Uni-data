@@ -45,7 +45,7 @@ namespace UniData
 
             database.Rows.Add("Alan", "Bennett", 24);
 
-
+            DatabaseGrid.CanUserAddRows = false; 
             DatabaseGrid.DataContext = database.DefaultView;
         }
 
@@ -109,6 +109,30 @@ namespace UniData
         {
             InputWindow inputWin = new InputWindow(DatabaseHelper.Input.Rows); // specifies adding row
             inputWin.ShowDialog();
+        }
+
+        private void DeleteRowClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DeleteRow((DatabaseGrid.SelectedItem as DataRowView).Row);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "An error has occured!");
+            }
+        }
+
+        private void DeleteRow(DataRow toDelete)
+        {
+            try
+            {
+                database.Rows.Remove(toDelete);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "An error has occured!");
+            }
         }
 
     }

@@ -49,9 +49,9 @@
                 <ContextMenu>
                     <MenuItem Header="Add Row"/>
                     <MenuItem Header="Add Column"/>
-                    <MenuItem Header="Delete Selected Row"/>
+                    <MenuItem Header="Delete Selected Row" Click="DeleteRowClick"/>
                     <MenuItem Header="Delete Specific Row"/>
-                    <MenuItem Header="Delete Column"/>
+                    <MenuItem Header="Delete Column" />
                     <MenuItem Header="Sort Database"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
