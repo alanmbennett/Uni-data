@@ -44,12 +44,8 @@
                 <MenuItem Header="Search"/>
             </Menu>
         </DockPanel>
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto">
-            <ListView.View>
-                <GridView>
-                </GridView>
-            </ListView.View>
-            <ListView.ContextMenu>
+        <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}">
+            <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Add Row"/>
                     <MenuItem Header="Add Column"/>
@@ -58,7 +54,7 @@
                     <MenuItem Header="Delete Column"/>
                     <MenuItem Header="Sort Database"/>
                 </ContextMenu>
-            </ListView.ContextMenu>
-        </ListView>
+            </DataGrid.ContextMenu>
+        </DataGrid>
     </Grid>
 </Window>

@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows;
 using System.Data;
 
 namespace UniData
@@ -38,20 +37,23 @@ namespace UniData
             User = user;
             dbName = null;
             database = new DataTable();
+
+            // Test data
+            database.Columns.Add("First Name", typeof(string));
+            database.Columns.Add("Last Name", typeof(string));
+            database.Columns.Add("Age", typeof(int));
+
+            database.Rows.Add("Alan", "Bennett", 24);
+
+
+            DatabaseGrid.DataContext = database.DefaultView;
         }
 
         private void LoadDatabaseClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = fileFilter;
-            
-            if(fileDialog.ShowDialog() == true)
-            {
-                /*using (FileStream readStream = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read))
-                {
-
-                }*/
-            }
+    
         }
 
         private void LogoutClick(object sender, RoutedEventArgs e)
