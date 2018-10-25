@@ -37,7 +37,7 @@ namespace UniData
 
 		public override string ToString()
 		{
-			return $"{Username}:{FirstName}, {LastName}";
+			return $"{Username}: {FirstName}, {LastName}";
 		}
 	}
 }
