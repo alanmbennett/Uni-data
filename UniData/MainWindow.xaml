@@ -38,7 +38,7 @@
                     <MenuItem Header="Add Column" Click="AddColumnClick"/>
                     <MenuItem Header="Delete Selected Row" Click="DeleteRowClick"/>
                     <MenuItem Header="Delete Column" Click="DeleteColumnClick"/>
-                    <MenuItem Header="Sort Database"/>
+                    <MenuItem Header="Sort Database" Click="SortDataClick"/>
                 </MenuItem>
                 <MenuItem Header="Search" Click="SearchDatabaseClick"/>
             </Menu>

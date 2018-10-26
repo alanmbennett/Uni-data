@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,32 @@ namespace UniData
     /// </summary>
     public partial class SortingWindow : Window
     {
-        public SortingWindow()
+
+		public DataTable database;
+		public List<string> column = new List<string>();
+
+
+		public SortingWindow(DataTable input)
         {
+
             InitializeComponent();
-        }
-    }
+
+			database = input;
+			foreach (DataColumn colum in database.Columns)
+			{
+				column.Add(colum.ColumnName);
+			}
+			Selection1Combo.ItemsSource = column;
+			Selection2Combo.ItemsSource = column;
+
+			DatabaseGrid.DataContext = database.DefaultView;
+
+		}
+
+		private void SubmitClick(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+	}
 }

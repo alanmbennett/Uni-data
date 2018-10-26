@@ -214,6 +214,12 @@ namespace UniData
 			search.ShowDialog();
 		}
 
+		private void SortDataClick(object sender, RoutedEventArgs e)
+		{
+			SortingWindow sort = new SortingWindow(database);
+			sort.ShowDialog();
+		}
+
 		private void DeleteColumn(DataColumn toDelete)
         {
             try
