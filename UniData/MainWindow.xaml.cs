@@ -133,7 +133,7 @@ namespace UniData
         {
             database.TableName = saveDialog.FileName;
             this.Title = database.TableName;
-            database.WriteXml(database.TableName); // will write database to XML file specified in SaveFileDialog
+            database.WriteXml(database.TableName, XmlWriteMode.WriteSchema); // will write database to XML file specified in SaveFileDialog
         }
 
         /* Method: LoadDialogFileOK
