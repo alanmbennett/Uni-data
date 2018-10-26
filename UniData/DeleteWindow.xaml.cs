@@ -20,8 +20,8 @@ namespace UniData
     /// </summary>
     public partial class DeleteWindow : Window
     {
-        DatabaseHelper.Input Input;
-        public bool cancelClicked;
+        DatabaseHelper.Input Input; // represents whether row or column input is desired
+        public bool cancelClicked; // represents if cancel button was clicked or not
 
         public DeleteWindow(DatabaseHelper.Input input, List<string> columns)
         {
@@ -32,24 +32,21 @@ namespace UniData
 
             if(Input == DatabaseHelper.Input.Columns)
             {
-                ColumnCombobox.ItemsSource = columns;
-                if(columns.Count > 0)
+                ColumnCombobox.ItemsSource = columns; // populate combobox with database columns
+
+                /* Set a default selected item */   
+                if(columns.Count > 0) 
                     ColumnCombobox.SelectedIndex = 0;
+
                 ColumnCombobox.Visibility = Visibility.Visible;
                 TextboxLabel.Content = "Column Name ";
 
-            }
-            else if (Input == DatabaseHelper.Input.Rows)
-            {
-                TextboxLabel.Content = "Row ID ";
             }
         }
 
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
             if (Input == DatabaseHelper.Input.Columns && ColumnCombobox.SelectedItem != null)
-                this.Close();
-            else if (Input == DatabaseHelper.Input.Rows && !string.IsNullOrWhiteSpace(DeletionTextbox.Text))
                 this.Close();
             else
             {
@@ -62,8 +59,6 @@ namespace UniData
         private void UpdateErrorMessage(object sender, TextChangedEventArgs e)
         {
             if (Input == DatabaseHelper.Input.Columns && ColumnCombobox.SelectedItem != null)
-                ErrorMessage.Visibility = Visibility.Hidden;
-            else if (Input == DatabaseHelper.Input.Rows && !string.IsNullOrWhiteSpace(DeletionTextbox.Text))
                 ErrorMessage.Visibility = Visibility.Hidden;
         }
 

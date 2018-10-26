@@ -22,7 +22,6 @@ namespace UniData
     /// </summary>
     public partial class AccountCreationWindow : Window
     {
-
 		private const string userFilePath = "login.xml";
 		private XmlSerializer Serializer = new XmlSerializer(typeof(List<UserAccount>));
 		private List<UserAccount> userList;

@@ -42,6 +42,7 @@ namespace UniData
             database = new DataTable();
             Columns = new List<string>();
 
+            /* Bind to DataGrid */    
             DatabaseGrid.CanUserAddRows = false;
             DatabaseGrid.DataContext = database.DefaultView;
         }
@@ -53,20 +54,22 @@ namespace UniData
             User = user;  
             dbName = null;
             database = new DataTable();
-   
             Columns = new List<string>();
 
+            /* Load DataTable from given XML document */
             DataSet dataset = new DataSet();
             dataset.ReadXml(loadPath, XmlReadMode.ReadSchema);
             database = dataset.Tables[0];
 
             this.Title = loadPath;
 
+            /* Copy column info into Columns List */
             foreach(DataColumn col in database.Columns)
             {
                 Columns.Add(col.ColumnName);
             }
            
+            /* Bind to DataGrid */
             DatabaseGrid.CanUserAddRows = false;
             DatabaseGrid.DataContext = database.DefaultView;
         }
@@ -96,6 +99,7 @@ namespace UniData
 
             if (!createWin.cancelClicked && !string.IsNullOrEmpty(createWin.DatabaseNameTextBox.Text))
             {
+                /* Save new intiail database to a XML file and open it up in a brand new window*/
                 SaveDatabase(createWin.DatabaseNameTextBox.Text);
                 MainWindow mw = new MainWindow(User);
                 mw.Title = saveDialog.FileName;
@@ -163,13 +167,13 @@ namespace UniData
             {
                 database.Columns.Add(inputWin.ColumnTextBox.Text, typeof(string));
                 Columns.Add(inputWin.ColumnTextBox.Text);
-                GridRefresh();
+                GridRefresh(); // ensures that DataGrid reflects column changes
             }
         }
 
         private void AddRowClick(object sender, RoutedEventArgs e)
         {
-            if (Columns.Count != 0)
+            if (Columns.Count > 0) // Don't allow user to add row until database has at least one columns
                 database.Rows.Add();
             else
                 MessageBox.Show("Cannot add rows to column-less table, please add a column first", "Invalid operation");
@@ -207,11 +211,12 @@ namespace UniData
             string toDelete = null;
 
             if (deleteWin.ColumnCombobox.SelectedItem != null)
-                toDelete = deleteWin.ColumnCombobox.SelectedItem.ToString();
+                toDelete = deleteWin.ColumnCombobox.SelectedItem.ToString(); // sets toDelete to seleted item in combobox
 
             if (!deleteWin.cancelClicked && !string.IsNullOrWhiteSpace(toDelete))
             {
-                DeleteColumn(database.Columns[toDelete]);
+                /* Delete column from database */
+                DeleteColumn(database.Columns[toDelete]); 
                 Columns.Remove(toDelete);
 
                 /* Below code ensures that deleted column is no longer displayed in DataGrid */
@@ -252,8 +257,8 @@ namespace UniData
 
         private void GridRefresh()
         {
-            DatabaseGrid.DataContext = null;
-            DatabaseGrid.DataContext = database.DefaultView;
+            DatabaseGrid.DataContext = null; // Unbinds the database by binding the DataGrid to null
+            DatabaseGrid.DataContext = database.DefaultView; // Rebinds database to DataGrid to ensure it displays as intended
         }
 
     }

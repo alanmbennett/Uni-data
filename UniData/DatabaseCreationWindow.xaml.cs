@@ -20,17 +20,17 @@ namespace UniData
     /// </summary>
     public partial class DatabaseCreationWindow : Window
     {
-        public bool cancelClicked;
+        public bool cancelClicked; // represents if cancel button was clicked or not
 
         public DatabaseCreationWindow()
         {
             InitializeComponent();
-            cancelClicked = false;
+            cancelClicked = false; // cancel button not clicked
         }
 
         private void CreateButtonClick(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(DatabaseNameTextBox.Text))
+            if (!string.IsNullOrEmpty(DatabaseNameTextBox.Text)) // check if database name has been inputted
                 this.Close();
             else
                 MessageBox.Show("Please fill in name in Name field", "Invalid Operation");

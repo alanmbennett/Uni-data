@@ -22,7 +22,7 @@ namespace UniData
     public partial class InputWindow : Window
     {
         DatabaseHelper.Input Input;
-        public bool cancelClicked;
+        public bool cancelClicked; // represents if cancel button has been clicked
 
         public InputWindow(DatabaseHelper.Input input)
         {
