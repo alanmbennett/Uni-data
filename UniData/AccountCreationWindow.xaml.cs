@@ -32,7 +32,7 @@ namespace UniData
             InitializeComponent();
 			userList = userAccounts;
         }
-
+		//write the account info to the login.xml
 		private void WriteFile()
 		{
 			using (FileStream filestream = new FileStream(userFilePath, FileMode.Create, FileAccess.Write))
@@ -40,12 +40,13 @@ namespace UniData
 				Serializer.Serialize(filestream, userList);
 			}
 		}
-
+		//cancel account creation
         private void CancelButtonClick(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+		//when submitted the input validation check with the account added
         private void SubmitButtonClick(object sender, RoutedEventArgs e)
         {
 			//validate input
@@ -63,48 +64,55 @@ namespace UniData
 			}
         }
 
+
 		private bool InputValidation()
 		{
 			bool output = true;
 
 			//column one
+			//user name
 			if (string.IsNullOrWhiteSpace(UsernameTextBox.Text))
 			{
 				output = false;
 				UsernameErrorMsg.Visibility = Visibility.Visible;
 			}else if (userList.Any(x => x.Username == UsernameTextBox.Text))//Checks if the user already exists
 			{
+				//check if user accounnt exists already
 				output = false;
 				UsernameErrorMsg.Visibility = Visibility.Visible;
 				MessageBox.Show("User exists in the System Use a different Username or login with that Username");
 			}
-
+			//first password check
 			if (string.IsNullOrWhiteSpace(UserPasswordBox.Password))
 			{
 				output = false;
 				PasswordErrorMsg.Visibility = Visibility.Visible;
-			}
+			}//second password check
 			if (string.IsNullOrWhiteSpace(ConfirmPasswordBox.Password))
 			{
 				output = false;
 				ConfirmPWErrorMsg.Visibility = Visibility.Visible;
 			}else if(UserPasswordBox.Password != ConfirmPasswordBox.Password)
 			{
+				//matching passwords check
 				output = false;
 				ConfirmPWErrorMsg.Visibility = Visibility.Visible;
 				MessageBox.Show("Passwords Do not Match");
 			}
 			//column two
+			//first name check
 			if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text))
 			{
 				output = false;
 				FirstNameErrorMsg.Visibility = Visibility.Visible;
 			}
+			//last name check
 			if (string.IsNullOrWhiteSpace(LastNameTextBox.Text))
 			{
 				output = false;
 				LastNameErrorMsg.Visibility = Visibility.Visible;
 			}
+			//email check
 			try
 			{
 				MailAddress t = new MailAddress(EmailTextBox.Text);
@@ -133,7 +141,7 @@ namespace UniData
 			ConfirmPWErrorMsg.Visibility = Visibility.Hidden;
 		}
 
-		//col 2
+		//column 2 error resetting
 		private void FirstNameTextBoxFocus(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			FirstNameErrorMsg.Visibility = Visibility.Hidden;

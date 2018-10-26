@@ -32,6 +32,8 @@
 		<Label Content="Criteria 2" Grid.Row="1" Grid.Column="0"/>
 		<ComboBox x:Name="Selection2Combo" Grid.Row="1" Grid.Column="1" Width="150" Height="35"/>
 
+		
+		<!--Radio selection Buttons-->
 		<StackPanel Grid.Column="2" Grid.RowSpan="2">
 			<StackPanel Orientation="Horizontal">
 				<Label Content="Ascending" VerticalAlignment="Center"/>
@@ -43,8 +45,10 @@
 			</StackPanel>
 		</StackPanel>
 		
+		<!--data display-->
 		<DataGrid x:Name="DatabaseGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}"/>
 
+		<!--interactive buttons-->
 		<Button x:Name="Submit" Content="Sort" Grid.Row="3" Grid.Column="3" Width="50" Height="30" Click="SubmitClick"/>
 		<Button x:Name="Reset" Content="Reset" Grid.Row="3" Grid.Column="4" Width="50" Height="30" Click="ResetClick"/>
 

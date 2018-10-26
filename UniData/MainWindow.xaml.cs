@@ -221,14 +221,18 @@ namespace UniData
 
 		private void SearchDatabaseClick(object sender, RoutedEventArgs e)
 		{
+			//confirm that the database has no pending changes
 			database.AcceptChanges();
+			//open the search Window
 			SearchWindow search = new SearchWindow(database);
 			search.ShowDialog();
 		}
 
 		private void SortDataClick(object sender, RoutedEventArgs e)
 		{
+			//confirm that the database has no pending changes
 			database.AcceptChanges();
+			//open the sorting Window
 			SortingWindow sort = new SortingWindow(database);
 			sort.ShowDialog();
 			

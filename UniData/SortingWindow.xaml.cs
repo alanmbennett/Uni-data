@@ -30,7 +30,7 @@ namespace UniData
         {
 
             InitializeComponent();
-
+			//set the database, and set the combo boxes with the column names
 			database = input;
 			foreach (DataColumn colum in database.Columns)
 			{
@@ -43,19 +43,22 @@ namespace UniData
 
 		}
 
+		//trigger once submitted
 		private void SubmitClick(object sender, RoutedEventArgs e)
 		{
-
+			//Validate if the combo boxes are selected
 			if (Selection1Combo.SelectedIndex > -1)
 			{
 				if(Selection2Combo.SelectedIndex > -1)
 				{
+					//check if it is sorted in ascending order
 					if (ascending.IsChecked == true)
 					{
 						database = database.Select().OrderBy(x => x[Selection1Combo.SelectedIndex]).ThenBy(x=> x[Selection2Combo.SelectedIndex]).CopyToDataTable();
 						DatabaseGrid.DataContext = null;
 						DatabaseGrid.DataContext = database.DefaultView;
 					}
+					//descending order
 					else
 					{
 						database = database.Select().OrderByDescending(x => x[Selection1Combo.SelectedIndex]).ThenByDescending(x => x[Selection2Combo.SelectedIndex]).CopyToDataTable();
@@ -63,14 +66,17 @@ namespace UniData
 						DatabaseGrid.DataContext = database.DefaultView;
 					}
 				}
+				//if there is only one selected criteria
 				else
 				{
+					//ascending order
 					if (ascending.IsChecked == true)
 					{
 						database = database.Select().OrderBy(x => x[Selection1Combo.SelectedIndex]).CopyToDataTable();
 						DatabaseGrid.DataContext = null;
 						DatabaseGrid.DataContext = database.DefaultView;
 					}
+					//desending order
 					else
 					{
 						database = database.Select().OrderByDescending(x => x[Selection1Combo.SelectedIndex]).CopyToDataTable();
@@ -79,8 +85,13 @@ namespace UniData
 					}
 				}
 			}
+			else
+			{
+				MessageBox.Show("Please select the first criteria that you want to sort by");
+			}
 		}
 
+		//reset the combo boxes and radio buttons to defaults
 		private void ResetClick(object sender, RoutedEventArgs e)
 		{
 			Selection1Combo.SelectedIndex = -1;

@@ -34,8 +34,10 @@
 		<ComboBox x:Name="Selection2Combo" Grid.Row="1" Grid.Column="1" Width="150" Height="35"/>
 		<TextBox x:Name="Selection2TextBox" Grid.Row="1" Grid.Column="2" Width="120" Height="35"/>
 
+		<!--Data Display-->
 		<DataGrid x:Name="DatabaseGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}"/>
 
+		<!--interactive buttons-->
 		<Button x:Name="Submit" Content="Search" Grid.Row="3" Grid.Column="3" Width="50" Height="30" Click="SubmitClick"/>
 		<Button x:Name="Reset" Content="Reset" Grid.Row="3" Grid.Column="4" Width="50" Height="30" Click="ResetClick"/>
 
