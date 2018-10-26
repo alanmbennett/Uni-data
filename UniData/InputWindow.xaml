@@ -5,32 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniData"
         mc:Ignorable="d"
-        Title="InputWindow" Height="450" Width="800">
+        Title="InputWindow" Height="250" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-       
-        <!-- Scroll bar? -->
-        <ScrollViewer HorizontalAlignment="Right" Height="auto" Grid.RowSpan="6" Grid.ColumnSpan="6" VerticalAlignment="Bottom" Width="auto"/>
-        
-        
 
-
-
+        <Label Content="Column to Add" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+        <TextBox x:Name="ColumnTextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Width="100" Margin="20"/>
+        <Button x:Name="AddButton" Content="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" Width="100" Margin="20" Click="AddButtonClick"/>
+        <Button x:Name="CancelButton" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Width="100" Margin="20" Click="CancelButtonClick"/>
 
     </Grid>
+
+
+
+
+
+
 </Window>

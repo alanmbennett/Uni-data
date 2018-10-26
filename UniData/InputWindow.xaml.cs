@@ -29,6 +29,22 @@ namespace UniData
             InitializeComponent();
         }
 
+        public void AddButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (Input == DatabaseHelper.Input.Columns && !string.IsNullOrWhiteSpace(ColumnTextBox.Text))
+                this.Close();
+            else
+                MessageBox.Show("An error has occurred", "Cannot add an empty column");
+
+        }
+
+        public void CancelButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+
+
 
     }
 }

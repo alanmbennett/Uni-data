@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
+using System.Xml;
 
 namespace UniData
 {
@@ -28,7 +29,9 @@ namespace UniData
         private string fileFilter = "XML Files(*.xml)|*.xml";
         private string dbName;
         private SaveFileDialog saveDialog;
+        private OpenFileDialog loadDialog;
         private DataTable database;
+        private List<string> Columns; 
 
         public MainWindow(UserAccount user)
         {
@@ -37,26 +40,31 @@ namespace UniData
             User = user;
             dbName = null;
             database = new DataTable();
-
-            // Test data
-            database.Columns.Add("First Name", typeof(string));
-            database.Columns.Add("Last Name", typeof(string));
-            database.Columns.Add("Age", typeof(int));
-
-            database.Rows.Add("Alan", "Bennett", 24);
-
+            Columns = new List<string>();
+         
             DatabaseGrid.CanUserAddRows = false;
             DatabaseGrid.DataContext = database.DefaultView;
         }
 
-        public MainWindow(UserAccount user, DataTable data)
+        public MainWindow(UserAccount user, string loadPath)
         {
             InitializeComponent();
             UserMenuItem.Header = $"Logged in as: {user.Username}";
-            User = user;
+            User = user;  
             dbName = null;
-            database = data;
+            database = new DataTable();
+   
+            Columns = new List<string>();
 
+            database.ReadXml(loadPath);
+
+            this.Title = loadPath;
+
+            foreach(DataColumn col in database.Columns)
+            {
+                Columns.Add(col.ColumnName);
+            }
+           
             DatabaseGrid.CanUserAddRows = false;
             DatabaseGrid.DataContext = database.DefaultView;
         }
@@ -64,9 +72,12 @@ namespace UniData
 
         private void LoadDatabaseClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = fileFilter;
-    
+            loadDialog = new OpenFileDialog();
+            loadDialog.Filter = fileFilter;
+            loadDialog.FileOk += LoadDialogFileOK; // set event handler to FileOK event
+            loadDialog.Title = "Load a Database";
+
+            loadDialog.ShowDialog();
         }
 
         private void LogoutClick(object sender, RoutedEventArgs e)
@@ -92,7 +103,10 @@ namespace UniData
             saveDialog = new SaveFileDialog();
             saveDialog.Filter = fileFilter;
             saveDialog.Title = "Save a Database";
-            if(name != null)
+            saveDialog.FileOk += SaveDialogFileOK; // set event handler to FileOK event
+
+            /* If file has been saved before, its name will populate the FileName box on SaveFileDialog*/
+            if (name != null)
                 saveDialog.FileName = $"{name}.xml";
             else if(name == null && dbName != null)
                 saveDialog.FileName = $"{dbName}.xml";
@@ -102,26 +116,52 @@ namespace UniData
 
         /* Method: SaveDialogFileOK
          * Description: Event handler for when user presses Save button on SaveFileDialog window
-         * CURRENTLY DOES NOT WORK CORRECTLY
          */
 
         private void SaveDialogFileOK(object sender, CancelEventArgs e)
         {
-            this.dbName = saveDialog.FileName;
-            this.Title = dbName;
-            database.WriteXml(dbName); // will write database to XML file specified in SaveFileDialog
+            database.TableName = saveDialog.FileName;
+            this.Title = database.TableName;
+            database.WriteXml(database.TableName, XmlWriteMode.WriteSchema); // will write database to XML file specified in SaveFileDialog
+        }
+
+        /* Method: LoadDialogFileOK
+         * Description: Event handler for when user presses Load button on OpenFileDialog window
+         */
+
+        private void LoadDialogFileOK(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                MainWindow newMain = new MainWindow(User, loadDialog.FileName);
+                this.Close();
+                newMain.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "File Load Error");
+            }
         }
 
         private void AddColumnClick(object sender, RoutedEventArgs e)
         {
             InputWindow inputWin = new InputWindow(DatabaseHelper.Input.Columns); // specifies adding column
             inputWin.ShowDialog();
+
+            if(!string.IsNullOrWhiteSpace(inputWin.ColumnTextBox.Text))
+            {
+                database.Columns.Add(inputWin.ColumnTextBox.Text, typeof(string));
+                Columns.Add(inputWin.ColumnTextBox.Text);
+                GridRefresh();
+            }
         }
 
         private void AddRowClick(object sender, RoutedEventArgs e)
         {
-            InputWindow inputWin = new InputWindow(DatabaseHelper.Input.Rows); // specifies adding row
-            inputWin.ShowDialog();
+            if (Columns.Count != 0)
+                database.Rows.Add();
+            else
+                MessageBox.Show("Cannot add rows to column-less table, please add a column first", "Invalid operation");
         }
 
         private void DeleteRowClick(object sender, RoutedEventArgs e)
@@ -150,16 +190,21 @@ namespace UniData
 
         private void DeleteColumnClick(object sender, RoutedEventArgs e)
         {
-            DeleteWindow deleteWin = new DeleteWindow(DatabaseHelper.Input.Columns);
+            DeleteWindow deleteWin = new DeleteWindow(DatabaseHelper.Input.Columns, Columns);
             deleteWin.ShowDialog();
 
-            if(!string.IsNullOrWhiteSpace(deleteWin.DeletionTextbox.Text))
+            string toDelete = null;
+
+            if (deleteWin.ColumnCombobox.SelectedItem != null)
+                toDelete = deleteWin.ColumnCombobox.SelectedItem.ToString();
+
+            if (!string.IsNullOrWhiteSpace(toDelete))
             {
-                DeleteColumn(database.Columns[deleteWin.DeletionTextbox.Text]);
+                DeleteColumn(database.Columns[toDelete]);
+                Columns.Remove(toDelete);
 
                 /* Below code ensures that deleted column is no longer displayed in DataGrid */
-                DatabaseGrid.DataContext = null;
-                DatabaseGrid.DataContext = database.DefaultView;
+                GridRefresh();
             }
         }
 
@@ -173,6 +218,12 @@ namespace UniData
             {
                 MessageBox.Show(ex.Message, "An error has occured!");
             }
+        }
+
+        private void GridRefresh()
+        {
+            DatabaseGrid.DataContext = null;
+            DatabaseGrid.DataContext = database.DefaultView;
         }
 
     }

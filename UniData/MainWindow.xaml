@@ -36,8 +36,7 @@
                 <MenuItem Header="Edit">
                     <MenuItem Header="Add Row" Click="AddRowClick"/>
                     <MenuItem Header="Add Column" Click="AddColumnClick"/>
-                    <MenuItem Header="Delete Selected Row"/>
-                    <MenuItem Header="Delete Specific Row"/>
+                    <MenuItem Header="Delete Selected Row" Click="DeleteRowClick"/>
                     <MenuItem Header="Delete Column" Click="DeleteColumnClick"/>
                     <MenuItem Header="Sort Database"/>
                 </MenuItem>
@@ -47,6 +46,7 @@
         <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}">
             <DataGrid.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="Add Row" Click="AddRowClick"/>
                     <MenuItem Header="Delete Selected Row" Click="DeleteRowClick"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
