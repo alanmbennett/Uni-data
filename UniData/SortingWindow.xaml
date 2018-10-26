@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniData"
         mc:Ignorable="d"
-        Title="SortingWindow" Height="450" Width="800">
+        Title="SortingWindow" Height="300" Width="500">
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>

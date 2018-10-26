@@ -46,9 +46,9 @@ namespace UniData
 		private void SubmitClick(object sender, RoutedEventArgs e)
 		{
 
-			if (Selection1Combo.SelectedIndex > 0)
+			if (Selection1Combo.SelectedIndex > -1)
 			{
-				if(Selection2Combo.SelectedIndex > 0)
+				if(Selection2Combo.SelectedIndex > -1)
 				{
 					if (ascending.IsChecked == true)
 					{

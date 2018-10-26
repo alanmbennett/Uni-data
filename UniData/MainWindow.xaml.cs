@@ -210,13 +210,14 @@ namespace UniData
 
 		private void SearchDatabaseClick(object sender, RoutedEventArgs e)
 		{
+			database.AcceptChanges();
 			SearchWindow search = new SearchWindow(database);
 			search.ShowDialog();
 		}
 
 		private void SortDataClick(object sender, RoutedEventArgs e)
 		{
-			
+			database.AcceptChanges();
 			SortingWindow sort = new SortingWindow(database);
 			sort.ShowDialog();
 			
