@@ -40,7 +40,7 @@
                     <MenuItem Header="Delete Column" Click="DeleteColumnClick"/>
                     <MenuItem Header="Sort Database"/>
                 </MenuItem>
-                <MenuItem Header="Search"/>
+                <MenuItem Header="Search" Click="SearchDatabaseClick"/>
             </Menu>
         </DockPanel>
         <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}">
