@@ -38,9 +38,9 @@
                     <MenuItem Header="Add Column" Click="AddColumnClick"/>
                     <MenuItem Header="Delete Selected Row" Click="DeleteRowClick"/>
                     <MenuItem Header="Delete Column" Click="DeleteColumnClick"/>
-                    <MenuItem Header="Sort Database"/>
+                    <MenuItem Header="Sort Database" Click="SortDataClick"/>
                 </MenuItem>
-                <MenuItem Header="Search"/>
+                <MenuItem Header="Search" Click="SearchDatabaseClick"/>
             </Menu>
         </DockPanel>
         <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}">

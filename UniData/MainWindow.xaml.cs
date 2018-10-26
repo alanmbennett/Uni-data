@@ -41,7 +41,7 @@ namespace UniData
             dbName = null;
             database = new DataTable();
             Columns = new List<string>();
-         
+
             DatabaseGrid.CanUserAddRows = false;
             DatabaseGrid.DataContext = database.DefaultView;
         }
@@ -70,7 +70,7 @@ namespace UniData
             DatabaseGrid.CanUserAddRows = false;
             DatabaseGrid.DataContext = database.DefaultView;
         }
-
+		
 
         private void LoadDatabaseClick(object sender, RoutedEventArgs e)
         {
@@ -219,7 +219,22 @@ namespace UniData
             }
         }
 
-        private void DeleteColumn(DataColumn toDelete)
+		private void SearchDatabaseClick(object sender, RoutedEventArgs e)
+		{
+			database.AcceptChanges();
+			SearchWindow search = new SearchWindow(database);
+			search.ShowDialog();
+		}
+
+		private void SortDataClick(object sender, RoutedEventArgs e)
+		{
+			database.AcceptChanges();
+			SortingWindow sort = new SortingWindow(database);
+			sort.ShowDialog();
+			
+		}
+
+		private void DeleteColumn(DataColumn toDelete)
         {
             try
             {

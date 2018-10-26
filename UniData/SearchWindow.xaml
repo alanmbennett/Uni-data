@@ -8,22 +8,36 @@
         Title="SearchWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="auto"/>
+		</Grid.ColumnDefinitions>
 
+		<!--Search criteria 1-->
+		<Label Content="Criteria 1" Grid.Row="0" Grid.Column="0"  />
+		<ComboBox x:Name="Selection1Combo" Grid.Row="0" Grid.Column="1" Width="150" Height="35"/>
+		<TextBox x:Name="Selection1TextBox" Grid.Row="0" Grid.Column="2" Width="120" Height="35"/>
 
-    </Grid>
+		<!--Search Criteria 2-->
+		<Label Content="Criteria 2" Grid.Row="1" Grid.Column="0"/>
+		<ComboBox x:Name="Selection2Combo" Grid.Row="1" Grid.Column="1" Width="150" Height="35"/>
+		<TextBox x:Name="Selection2TextBox" Grid.Row="1" Grid.Column="2" Width="120" Height="35"/>
+
+		<DataGrid x:Name="DatabaseGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}"/>
+
+		<Button x:Name="Submit" Content="Search" Grid.Row="3" Grid.Column="3" Width="50" Height="30" Click="SubmitClick"/>
+		<Button x:Name="Reset" Content="Reset" Grid.Row="3" Grid.Column="4" Width="50" Height="30" Click="ResetClick"/>
+
+	</Grid>
 </Window>
