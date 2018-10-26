@@ -38,7 +38,8 @@ namespace UniData
 			}
 			Selection1Combo.ItemsSource = column;
 			Selection2Combo.ItemsSource = column;
-			//set the base data contex
+            //set the base data contex
+            DatabaseGrid.IsReadOnly = true;
 			DatabaseGrid.DataContext = search.DefaultView;
 		}
 
