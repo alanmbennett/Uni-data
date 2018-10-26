@@ -21,11 +21,13 @@ namespace UniData
 
     public partial class InputWindow : Window
     {
-        DatabaseHelper.Input Input; 
+        DatabaseHelper.Input Input;
+        public bool cancelClicked;
 
         public InputWindow(DatabaseHelper.Input input)
         {
             Input = input;
+            cancelClicked = false;
             InitializeComponent();
         }
 
@@ -40,6 +42,7 @@ namespace UniData
 
         public void CancelButtonClick(object sender, RoutedEventArgs e)
         {
+            cancelClicked = true;
             this.Close();
         }
 

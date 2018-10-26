@@ -21,11 +21,14 @@ namespace UniData
     public partial class DeleteWindow : Window
     {
         DatabaseHelper.Input Input;
+        public bool cancelClicked;
 
         public DeleteWindow(DatabaseHelper.Input input, List<string> columns)
         {
             Input = input;
             InitializeComponent();
+
+            cancelClicked = false;
 
             if(Input == DatabaseHelper.Input.Columns)
             {
@@ -64,6 +67,11 @@ namespace UniData
                 ErrorMessage.Visibility = Visibility.Hidden;
         }
 
+        private void CancelClick(object sender, RoutedEventArgs e)
+        {
+            cancelClicked = true;
+            this.Close();
+        }
 
 
 

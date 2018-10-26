@@ -94,7 +94,7 @@ namespace UniData
             DatabaseCreationWindow createWin = new DatabaseCreationWindow();
             createWin.ShowDialog();
 
-            if (!string.IsNullOrEmpty(createWin.DatabaseNameTextBox.Text))
+            if (!createWin.cancelClicked && !string.IsNullOrEmpty(createWin.DatabaseNameTextBox.Text))
             {
                 SaveDatabase(createWin.DatabaseNameTextBox.Text);
                 MainWindow mw = new MainWindow(User);
@@ -159,7 +159,7 @@ namespace UniData
             InputWindow inputWin = new InputWindow(DatabaseHelper.Input.Columns); // specifies adding column
             inputWin.ShowDialog();
 
-            if(!string.IsNullOrWhiteSpace(inputWin.ColumnTextBox.Text))
+            if(!inputWin.cancelClicked && !string.IsNullOrWhiteSpace(inputWin.ColumnTextBox.Text))
             {
                 database.Columns.Add(inputWin.ColumnTextBox.Text, typeof(string));
                 Columns.Add(inputWin.ColumnTextBox.Text);
@@ -209,7 +209,7 @@ namespace UniData
             if (deleteWin.ColumnCombobox.SelectedItem != null)
                 toDelete = deleteWin.ColumnCombobox.SelectedItem.ToString();
 
-            if (!string.IsNullOrWhiteSpace(toDelete))
+            if (!deleteWin.cancelClicked && !string.IsNullOrWhiteSpace(toDelete))
             {
                 DeleteColumn(database.Columns[toDelete]);
                 Columns.Remove(toDelete);

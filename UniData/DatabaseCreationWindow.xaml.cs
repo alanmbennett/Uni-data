@@ -20,9 +20,12 @@ namespace UniData
     /// </summary>
     public partial class DatabaseCreationWindow : Window
     {
+        public bool cancelClicked;
+
         public DatabaseCreationWindow()
         {
             InitializeComponent();
+            cancelClicked = false;
         }
 
         private void CreateButtonClick(object sender, RoutedEventArgs e)
@@ -31,6 +34,12 @@ namespace UniData
                 this.Close();
             else
                 MessageBox.Show("Please fill in name in Name field", "Invalid Operation");
+        }
+
+        private void CancelClick(object sender, RoutedEventArgs e)
+        {
+            cancelClicked = true;
+            this.Close();
         }
     }
 }

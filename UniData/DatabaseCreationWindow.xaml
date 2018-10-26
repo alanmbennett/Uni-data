@@ -25,7 +25,7 @@
         <!-- Buttons - SubmitButton is set as default when enter key is pressed -->
         
         <Button x:Name="CreateButton" Content="Create Database" FontSize="12pt" Grid.Column="0" Grid.Row="9" Width="auto" Height="40px" Margin="20px" IsDefault="True" Click="CreateButtonClick" />
-        <Button x:Name="CancelButton" Content="Cancel" FontSize="12pt" Grid.Column="1" Grid.Row="9" Width="auto" Height="40px" Margin="20px"/>
+        <Button x:Name="CancelButton" Content="Cancel" FontSize="12pt" Grid.Column="1" Grid.Row="9" Width="auto" Height="40px" Margin="20px" Click="CancelClick"/>
 
 
 
