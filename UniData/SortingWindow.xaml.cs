@@ -81,5 +81,12 @@ namespace UniData
 			}
 		}
 
+		private void ResetClick(object sender, RoutedEventArgs e)
+		{
+			Selection1Combo.SelectedIndex = -1;
+			Selection2Combo.SelectedIndex = -1;
+			ascending.IsChecked = true;
+		}
+
 	}
 }

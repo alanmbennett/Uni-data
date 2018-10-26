@@ -46,6 +46,7 @@
 		<DataGrid x:Name="DatabaseGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}"/>
 
 		<Button x:Name="Submit" Content="Sort" Grid.Row="3" Grid.Column="3" Width="50" Height="30" Click="SubmitClick"/>
+		<Button x:Name="Reset" Content="Reset" Grid.Row="3" Grid.Column="4" Width="50" Height="30" Click="ResetClick"/>
 
 	</Grid>
 </Window>
