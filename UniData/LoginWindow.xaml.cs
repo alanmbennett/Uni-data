@@ -17,50 +17,53 @@ using System.Xml.Serialization;
 
 namespace UniData
 {
-    /// <summary>
-    /// Interaction logic for LoginWindow.xaml
-    /// </summary>
-    public partial class LoginWindow : Window
-    {
-        private const string userFilePath = "login.xml";
-        private XmlSerializer Serializer = new XmlSerializer(typeof(List<UserAccount>));
-        private List<UserAccount> userList; 
+	/// <summary>
+	/// Interaction logic for LoginWindow.xaml
+	/// </summary>
+	public partial class LoginWindow : Window
+	{
+		private const string userFilePath = "login.xml";
+		private XmlSerializer Serializer = new XmlSerializer(typeof(List<UserAccount>));
+		private List<UserAccount> userList;
 
-        public LoginWindow()
-        {
-            ReadUsersFromFile(); // read users from XML file
-            InitializeComponent();
-        }
+		public LoginWindow()
+		{
+			ReadUsersFromFile(); // read users from XML file
+			InitializeComponent();
+		}
 
-        public LoginWindow(string lastUsername)
-        {
-            ReadUsersFromFile(); // read users from XML file
-            InitializeComponent();
-            UsernameTextBox.Text = lastUsername;
-        }
+		public LoginWindow(string lastUsername)
+		{
+			ReadUsersFromFile(); // read users from XML file
+			InitializeComponent();
+			UsernameTextBox.Text = lastUsername;
+		}
 
-        private void CreateAccountButtonClick(object sender, RoutedEventArgs e)
-        {
-            AccountCreationWindow accWin = new AccountCreationWindow();
-            accWin.ShowDialog();
-        }
+		private void CreateAccountButtonClick(object sender, RoutedEventArgs e)
+		{
+			AccountCreationWindow accWin = new AccountCreationWindow(userList);
+			accWin.ShowDialog();
+		}
 
-        private void LoginButtonClick(object sender, RoutedEventArgs e)
-        {
-            /* Insert code here that checks login credentials before opening the MainWindow*/
-            // Hard-coded test user is tentative code so program doesn't crash for now
-            UserAccount currentUser;
+		private void LoginButtonClick(object sender, RoutedEventArgs e)
+		{
+			/* Insert code here that checks login credentials before opening the MainWindow*/
+			// Hard-coded test user is tentative code so program doesn't crash for now
+			UserAccount currentUser;
 
-            try
-            {
-                currentUser = userList.Find(u => u.Username == UsernameTextBox.Text && u.Password == UserPaswordBox.Password);
-                MainWindow main = new MainWindow(new UserAccount("Test", "Tester", "Testing21", "testing@gmail.com", "password"));
-                this.Close();
-                main.ShowDialog();
-            }
-            catch(Exception ex)
-            {
-            }
+			currentUser = userList.Find(u => u.Username == UsernameTextBox.Text && u.Password == UserPaswordBox.Password);
+			if (currentUser != null)
+			{ 
+				MainWindow main = new MainWindow(currentUser);
+			    this.Close();
+				main.ShowDialog();
+			}
+			else
+			{
+				MessageBox.Show("User does not exist");
+			}
+
+
         }
 
         /* Method: ReadUsersFromFile
@@ -72,16 +75,20 @@ namespace UniData
 
         private void ReadUsersFromFile()
         {
-            bool fileExists = File.Exists(userFilePath);
-            bool fileEmpty = new FileInfo(userFilePath).Length == 0;
+			//validate if the user file exists
+            if (File.Exists(userFilePath))
+			{
+				//read in the file if it exists
+				using (FileStream filestream = new FileStream(userFilePath, FileMode.Open, FileAccess.Read))
+				{
+					userList = Serializer.Deserialize(filestream) as List<UserAccount>;
+				}
+			}else
+			{
+				//generate a empty user list
+				userList = new List<UserAccount>();
+			}
 
-            using (FileStream filestream = new FileStream(userFilePath, FileMode.OpenOrCreate, FileAccess.Read))
-            {
-                if (fileExists && !fileEmpty)
-                    userList = Serializer.Deserialize(filestream) as List<UserAccount>;
-                else
-                    userList = new List<UserAccount>();
-            }
-        }
+		}
     }
 }

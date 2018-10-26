@@ -36,7 +36,7 @@ namespace UniData
         public MainWindow(UserAccount user)
         {
             InitializeComponent();
-            UserMenuItem.Header = $"Logged in as: {user.Username}";
+            UserMenuItem.Header = $"Logged in as: {user}";
             User = user;
             dbName = null;
             database = new DataTable();

@@ -25,33 +25,33 @@
         
         <!-- Username field -->
         <Label Content="Username: " FontSize="12pt" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="UsernameTextBox" FontSize="12pt" Grid.Column="1" Grid.Row="0" Width="auto" Height="30px" Margin="20px" />
-        <Label x:Name="UsernameErrorMsg" Content="Error" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+        <TextBox x:Name="UsernameTextBox" FontSize="12pt" Grid.Column="1" Grid.Row="0" Width="auto" Height="30px" Margin="20px" IsKeyboardFocusedChanged="UsernameTextBoxFocus"/>
+		<Label x:Name="UsernameErrorMsg" Content="Error" Grid.Column="1" Grid.Row="0" FontSize="12pt" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="Red" Visibility="Hidden"/>
 
         <!-- Password field -->
         <Label Content="Password: " FontSize="12pt" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <PasswordBox x:Name="UserPaswordBox" FontSize="12pt" Grid.Column="1" Grid.Row="2" Width="auto" Height="30px" Margin="20px"/>
-        <Label x:Name="PasswordErrorMsg" Content="Error" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+		<PasswordBox x:Name="UserPasswordBox" FontSize="12pt" Grid.Column="1" Grid.Row="2" Width="auto" Height="30px" Margin="20px" IsKeyboardFocusedChanged="UserPasswordBoxFocus"/>
+        <Label x:Name="PasswordErrorMsg" Content="Error" Grid.Column="1" Grid.Row="2" FontSize="12pt" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="Red" Visibility="Hidden"/>
         
         <!-- Confirm Password field -->
         <Label Content="Confirm Password: " FontSize="12pt" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <PasswordBox x:Name="ConfirmPasswordBox" FontSize="12pt" Grid.Column="1" Grid.Row="4" Width="auto" Height="30px" Margin="20px"/>
-        <Label x:Name="ConfirmPWErrorMsg" Content="Error" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+		<PasswordBox x:Name="ConfirmPasswordBox" FontSize="12pt" Grid.Column="1" Grid.Row="4" Width="auto" Height="30px" Margin="20px" IsKeyboardFocusedChanged="PasswordValidationFocus"/>
+        <Label x:Name="ConfirmPWErrorMsg" Content="Error" Grid.Column="1" Grid.Row="4" FontSize="12pt" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="Red" Visibility="Hidden"/>
 
         <!-- First Name field -->
         <Label Content="First Name: " FontSize="12pt" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="FirstNameTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="0" Width="auto" Height="30px" Margin="20px" />
-        <Label x:Name="FirstNameErrorMsg" Content="Error" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+		<TextBox x:Name="FirstNameTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="0" Width="auto" Height="30px" Margin="20px" IsKeyboardFocusedChanged="FirstNameTextBoxFocus"/>
+        <Label x:Name="FirstNameErrorMsg" Content="Error" Grid.Column="3" Grid.Row="0" FontSize="12pt" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="Red" Visibility="Hidden"/>
         
         <!-- Last Name field -->
         <Label Content="Last Name: " FontSize="12pt" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="LastNameTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="2" Width="auto" Height="30px" Margin="20px" />
-        <Label x:Name="LastNameErrorMsg" Content="Error" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+		<TextBox x:Name="LastNameTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="2" Width="auto" Height="30px" Margin="20px" IsKeyboardFocusedChanged="LastNameTextBoxFocus"/>
+        <Label x:Name="LastNameErrorMsg" Content="Error" Grid.Column="3" Grid.Row="2" FontSize="12pt" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="Red" Visibility="Hidden"/>
 
         <!-- Email field -->
         <Label Content="Email Address: " FontSize="12pt" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="EmailTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="4" Width="auto" Height="30px" Margin="20px" />
-        <Label x:Name="EmailErrorMsg" Content="Error" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
+		<TextBox x:Name="EmailTextBox" FontSize="12pt" Grid.Column="3" Grid.Row="4" Width="auto" Height="30px" Margin="20px" IsKeyboardFocusedChanged="EmailTextBoxFocus"/>
+        <Label x:Name="EmailErrorMsg" Content="Error" Grid.Column="3" Grid.Row="4" FontSize="12pt" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="Red" Visibility="Hidden"/>
 
         <!-- Buttons - SubmitButton is set as default when enter key is pressed -->
         <Label x:Name="GeneralErrorMsg" Content="Error" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" FontSize="12pt" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red" Visibility="Hidden"/>
