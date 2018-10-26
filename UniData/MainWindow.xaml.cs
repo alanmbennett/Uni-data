@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows;
 using System.Data;
 
 namespace UniData
@@ -34,7 +33,7 @@ namespace UniData
         public MainWindow(UserAccount user)
         {
             InitializeComponent();
-            UserMenuItem.Header = $"Logged in as: {user.Username}";
+            UserMenuItem.Header = $"Logged in as: {user}";
             User = user;
             dbName = null;
             database = new DataTable();
