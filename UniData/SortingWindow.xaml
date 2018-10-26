@@ -27,16 +27,25 @@
 		<!--Search criteria 1-->
 		<Label Content="Criteria 1" Grid.Row="0" Grid.Column="0"  />
 		<ComboBox x:Name="Selection1Combo" Grid.Row="0" Grid.Column="1" Width="150" Height="35"/>
-		<TextBox x:Name="Selection1TextBox" Grid.Row="0" Grid.Column="2" Width="120" Height="35"/>
-
+		
 		<!--Search Criteria 2-->
 		<Label Content="Criteria 2" Grid.Row="1" Grid.Column="0"/>
 		<ComboBox x:Name="Selection2Combo" Grid.Row="1" Grid.Column="1" Width="150" Height="35"/>
-		<TextBox x:Name="Selection2TextBox" Grid.Row="1" Grid.Column="2" Width="120" Height="35"/>
 
+		<StackPanel Grid.Column="2" Grid.RowSpan="2">
+			<StackPanel Orientation="Horizontal">
+				<Label Content="Ascending" VerticalAlignment="Center"/>
+				<RadioButton Name="ascending" VerticalAlignment="Center" GroupName="order" IsChecked="True"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<Label Content="Decending" VerticalAlignment="Center"/>
+				<RadioButton Name="decending"  VerticalAlignment="Center" GroupName="order"/>
+			</StackPanel>
+		</StackPanel>
+		
 		<DataGrid x:Name="DatabaseGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}"/>
 
-		<Button x:Name="Submit" Content="Search" Grid.Row="3" Grid.Column="3" Width="50" Height="30" Click="SubmitClick"/>
+		<Button x:Name="Submit" Content="Sort" Grid.Row="3" Grid.Column="3" Width="50" Height="30" Click="SubmitClick"/>
 
 	</Grid>
 </Window>

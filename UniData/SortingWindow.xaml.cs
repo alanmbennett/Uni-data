@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -45,6 +46,39 @@ namespace UniData
 		private void SubmitClick(object sender, RoutedEventArgs e)
 		{
 
+			if (Selection1Combo.SelectedIndex > 0)
+			{
+				if(Selection2Combo.SelectedIndex > 0)
+				{
+					if (ascending.IsChecked == true)
+					{
+						database = database.Select().OrderBy(x => x[Selection1Combo.SelectedIndex]).ThenBy(x=> x[Selection2Combo.SelectedIndex]).CopyToDataTable();
+						DatabaseGrid.DataContext = null;
+						DatabaseGrid.DataContext = database.DefaultView;
+					}
+					else
+					{
+						database = database.Select().OrderByDescending(x => x[Selection1Combo.SelectedIndex]).ThenByDescending(x => x[Selection2Combo.SelectedIndex]).CopyToDataTable();
+						DatabaseGrid.DataContext = null;
+						DatabaseGrid.DataContext = database.DefaultView;
+					}
+				}
+				else
+				{
+					if (ascending.IsChecked == true)
+					{
+						database = database.Select().OrderBy(x => x[Selection1Combo.SelectedIndex]).CopyToDataTable();
+						DatabaseGrid.DataContext = null;
+						DatabaseGrid.DataContext = database.DefaultView;
+					}
+					else
+					{
+						database = database.Select().OrderByDescending(x => x[Selection1Combo.SelectedIndex]).CopyToDataTable();
+						DatabaseGrid.DataContext = null;
+						DatabaseGrid.DataContext = database.DefaultView;
+					}
+				}
+			}
 		}
 
 	}
