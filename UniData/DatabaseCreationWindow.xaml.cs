@@ -20,17 +20,17 @@ namespace UniData
     /// </summary>
     public partial class DatabaseCreationWindow : Window
     {
-        MainWindow MainWin;
-        public DatabaseCreationWindow(MainWindow mw)
+        public DatabaseCreationWindow()
         {
-            MainWin = mw;
             InitializeComponent();
         }
 
         private void CreateButtonClick(object sender, RoutedEventArgs e)
         {
-            MainWin.SaveDatabase(DatabaseNameTextBox.Text);
-            this.Close();
+            if (!string.IsNullOrEmpty(DatabaseNameTextBox.Text))
+                this.Close();
+            else
+                MessageBox.Show("Please fill in name in Name field", "Invalid Operation");
         }
     }
 }

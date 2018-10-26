@@ -27,7 +27,7 @@ namespace UniData
     {
         private UserAccount User;
         private string fileFilter = "XML Files(*.xml)|*.xml";
-        private string dbName;
+        public string dbName;
         private SaveFileDialog saveDialog;
         private OpenFileDialog loadDialog;
         private DataTable database;
@@ -56,7 +56,9 @@ namespace UniData
    
             Columns = new List<string>();
 
-            database.ReadXml(loadPath);
+            DataSet dataset = new DataSet();
+            dataset.ReadXml(loadPath, XmlReadMode.ReadSchema);
+            database = dataset.Tables[0];
 
             this.Title = loadPath;
 
@@ -89,8 +91,17 @@ namespace UniData
 
         private void CreateDatabaseClick(object sender, RoutedEventArgs e)
         {
-            DatabaseCreationWindow createWin = new DatabaseCreationWindow(this);
+            DatabaseCreationWindow createWin = new DatabaseCreationWindow();
             createWin.ShowDialog();
+
+            if (!string.IsNullOrEmpty(createWin.DatabaseNameTextBox.Text))
+            {
+                SaveDatabase(createWin.DatabaseNameTextBox.Text);
+                MainWindow mw = new MainWindow(User);
+                mw.Title = saveDialog.FileName;
+                this.Close();
+                mw.ShowDialog();
+            }
         }
 
         private void SaveDatabaseClick(object sender, RoutedEventArgs e)
@@ -122,7 +133,7 @@ namespace UniData
         {
             database.TableName = saveDialog.FileName;
             this.Title = database.TableName;
-            database.WriteXml(database.TableName, XmlWriteMode.WriteSchema); // will write database to XML file specified in SaveFileDialog
+            database.WriteXml(database.TableName); // will write database to XML file specified in SaveFileDialog
         }
 
         /* Method: LoadDialogFileOK

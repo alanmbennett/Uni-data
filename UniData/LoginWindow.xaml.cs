@@ -78,11 +78,11 @@ namespace UniData
 			//validate if the user file exists
             if (File.Exists(userFilePath))
 			{
-				//read in the file if it exists
-				using (FileStream filestream = new FileStream(userFilePath, FileMode.Open, FileAccess.Read))
-				{
-					userList = Serializer.Deserialize(filestream) as List<UserAccount>;
-				}
+                //read in the file if it exists
+                using (FileStream filestream = new FileStream(userFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    userList = Serializer.Deserialize(filestream) as List<UserAccount>;
+                }
 			}else
 			{
 				//generate a empty user list
