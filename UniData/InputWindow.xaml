@@ -17,8 +17,8 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="Column to Add" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-        <TextBox x:Name="ColumnTextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Width="100" Margin="20"/>
-        <Button x:Name="AddButton" Content="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" Width="100" Margin="20" Click="AddButtonClick"/>
+        <TextBox x:Name="ColumnTextBox" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Width="100" Margin="20" />
+        <Button x:Name="AddButton" Content="Add" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" Width="100" Margin="20" Click="AddButtonClick" IsDefault="True"/>
         <Button x:Name="CancelButton" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Width="100" Margin="20" Click="CancelButtonClick"/>
 
     </Grid>
