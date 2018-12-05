@@ -57,8 +57,8 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}"
-                  CanUserAddRows="False" SelectedItem="{Binding SelectedRow}" DataContext="{Binding DatabaseView}">
+        <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding Database, Mode=TwoWay}"
+                  CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" SelectedItem="{Binding SelectedRow, Mode=TwoWay}" >
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Add Row" Command="{Binding AddRowCommand}" InputGestureText="Ctrl+R"/>

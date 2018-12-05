@@ -303,6 +303,7 @@ namespace UniData
             try
             {
                 DeleteRow(SelectedRow.Row); // note: SelectedRow binding not updating so DeleteRowClick will throw an exception
+                DBRefresh();
             }
             catch (Exception ex)
             {
