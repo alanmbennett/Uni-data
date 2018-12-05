@@ -59,6 +59,7 @@
       <DependentUpon>DatabaseCreationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="DeleteWindow.xaml.cs">
       <DependentUpon>DeleteWindow.xaml</DependentUpon>
     </Compile>

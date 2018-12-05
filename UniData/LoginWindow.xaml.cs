@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Security;
@@ -20,8 +21,21 @@ namespace UniData
 	/// <summary>
 	/// Interaction logic for LoginWindow.xaml
 	/// </summary>
-	public partial class LoginWindow : Window
+	public partial class LoginWindow : Window, INotifyPropertyChanged
 	{
+
+		private string _username;
+		public string Username
+		{
+			get { return _username; }
+			set
+			{
+				_username = value;
+				PropertyChanged(this, new PropertyChangedEventArgs("Username"));
+			}
+		}
+
+
 		private const string userFilePath = "login.xml";
 		private XmlSerializer Serializer = new XmlSerializer(typeof(List<UserAccount>));
 		private List<UserAccount> userList;
@@ -30,13 +44,15 @@ namespace UniData
 		{
 			ReadUsersFromFile(); // read users from XML file
 			InitializeComponent();
+			DataContext = this;
 		}
 
 		public LoginWindow(string lastUsername)
 		{
 			ReadUsersFromFile(); // read users from XML file
 			InitializeComponent();
-			UsernameTextBox.Text = lastUsername;
+			Username = lastUsername;
+			DataContext = this;
 		}
 
 		private void CreateAccountButtonClick(object sender, RoutedEventArgs e)
@@ -51,7 +67,7 @@ namespace UniData
 			// Hard-coded test user is tentative code so program doesn't crash for now
 			UserAccount currentUser;
 
-			currentUser = userList.Find(u => u.Username == UsernameTextBox.Text && u.Password == UserPaswordBox.Password);
+			currentUser = userList.Find(u => u.Username == Username && u.Password == UserPaswordBox.Password);
 			if (currentUser != null)
 			{ 
 				MainWindow main = new MainWindow(currentUser);
@@ -90,5 +106,7 @@ namespace UniData
 			}
 
 		}
-    }
+
+		public event PropertyChangedEventHandler PropertyChanged = delegate { };
+	}
 }
