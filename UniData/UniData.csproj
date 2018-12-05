@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateFillWindow.xaml.cs">
+      <DependentUpon>CreateFillWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateFillWindowVM.cs" />
     <Compile Include="DatabaseCreationWindow.xaml.cs">
       <DependentUpon>DatabaseCreationWindow.xaml</DependentUpon>
     </Compile>
@@ -79,6 +83,10 @@
     </Compile>
     <Compile Include="UserAccount.cs" />
     <Page Include="AccountCreationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateFillWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

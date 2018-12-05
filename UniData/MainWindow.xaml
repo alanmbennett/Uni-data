@@ -52,6 +52,7 @@
                     <MenuItem Header="Delete Selected Row" Command="{Binding DeleteRowCommand}"/>
                     <MenuItem Header="Delete Column" Command="{Binding DeleteColumnCommand}" />
                     <MenuItem Header="Mass Delete by Value" Command="{Binding MassDeleteCommand}" />
+                    <MenuItem Header="Create Column and Fill" Command="{Binding CreateFillCommand}" />
                     <MenuItem Header="Sort Database" Command="{Binding SortDataCommand}" />
                 </MenuItem>
                 <MenuItem Header="Search" Command="{Binding SearchDatabaseCommand}">

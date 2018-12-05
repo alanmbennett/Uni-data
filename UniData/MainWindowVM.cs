@@ -511,6 +511,51 @@ namespace UniData
             }
         }
 
+        DelegateCommand _createFillEvent;
+        public ICommand CreateFillCommand
+        {
+            get
+            {
+                if (_createFillEvent == null)
+                {
+                    _createFillEvent = new DelegateCommand(CreateFillClick);
+                }
+
+                return _createFillEvent;
+            }
+        }
+
+        private void CreateFillClick(object sender)
+        {
+            CreateFillWindow createFillWin = new CreateFillWindow();
+            CreateFillWindowVM createFillWinVM = new CreateFillWindowVM(createFillWin);
+            createFillWin.DataContext = createFillWinVM;
+            createFillWin.ShowDialog();
+
+            if(!createFillWinVM.cancel)
+            {
+                try
+                {
+                    Database.Columns.Add(createFillWinVM.ColumnToCreate, typeof(string));
+                    Columns.Add(createFillWinVM.ColumnToCreate);
+
+                    if(Database.Rows.Count <= 0)
+                        Database.Rows.Add();
+
+                    foreach (DataRow row in Database.Rows)
+                    {
+                            row[createFillWinVM.ColumnToCreate] = createFillWinVM.ToFill;
+                    }
+
+                    DBRefresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "An error has occurred!");
+                }
+            }
+        }
+
         private void DBRefresh()
         {
             DatabaseView = null;
