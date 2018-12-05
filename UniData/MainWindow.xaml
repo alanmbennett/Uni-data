@@ -5,7 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniData"
         mc:Ignorable="d"
-        Title="Blank Database" Height="450" Width="800" ResizeMode="NoResize">
+        Title="{Binding DbName}" Height="450" Width="800" ResizeMode="NoResize">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="R" Command="{Binding AddRowCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="C" Command="{Binding AddColumnCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveDatabaseCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding CreateDatabaseCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="O" Command="{Binding LoadDatabaseCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="F" Command="{Binding SearchDatabaseCommand}"/>
+    </Window.InputBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -26,28 +35,37 @@
         <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" VerticalAlignment="Top" Width="800">
             <Menu DockPanel.Dock="Top">
                 <MenuItem x:Name="UserMenuItem" Margin="0,0,10,0">
-                    <MenuItem Header="Logout" Click="LogoutClick" />
+                    <MenuItem.Header>
+                        <Run Text="{Binding User, StringFormat='Logged in as {0}', Mode=OneWay}"/>
+                    </MenuItem.Header>
+                    <MenuItem Header="Logout" Command="{Binding LogoutCommand}"/>
                 </MenuItem>
                 <MenuItem Header="File">
-                    <MenuItem Header="New Database" Click="CreateDatabaseClick"/>
-                    <MenuItem Header="Load Existing Database" Click="LoadDatabaseClick"/>
-                    <MenuItem Header="Save Database" Click="SaveDatabaseClick"/>
+                    <MenuItem Header="New Database" Command="{Binding CreateDatabaseCommand}" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="Load Existing Database" Command="{Binding LoadDatabaseCommand}" InputGestureText="Ctrl+O"/>
+                    <MenuItem Header="Save Database As" Command="{Binding SaveAsCommand}"/>
+                    <MenuItem Header="Save Database" Command="{Binding SaveDatabaseCommand}" InputGestureText="Ctrl+S"/>
                 </MenuItem>
                 <MenuItem Header="Edit">
-                    <MenuItem Header="Add Row" Click="AddRowClick"/>
-                    <MenuItem Header="Add Column" Click="AddColumnClick"/>
-                    <MenuItem Header="Delete Selected Row" Click="DeleteRowClick"/>
-                    <MenuItem Header="Delete Column" Click="DeleteColumnClick"/>
-                    <MenuItem Header="Sort Database" Click="SortDataClick"/>
+                    <MenuItem Header="Add Column" Command="{Binding AddColumnCommand}" InputGestureText="Ctrl+C"/>
+                    <MenuItem Header="Add Row" Command="{Binding AddRowCommand}" InputGestureText="Ctrl+R"/>
+                    <MenuItem Header="Delete Selected Row" Command="{Binding DeleteRowCommand}"/>
+                    <MenuItem Header="Delete Column" Command="{Binding DeleteColumnCommand}" />
+                    <MenuItem Header="Mass Delete by Value" Command="{Binding MassDeleteCommand}" />
+                    <MenuItem Header="Create Column and Fill" Command="{Binding CreateFillCommand}" />
+                    <MenuItem Header="Sort Database" Command="{Binding SortDataCommand}" />
                 </MenuItem>
-                <MenuItem Header="Search" Click="SearchDatabaseClick"/>
+                <MenuItem Header="Search" Command="{Binding SearchDatabaseCommand}">
+                    <MenuItem Header="Search" Command="{Binding SearchDatabaseCommand}" InputGestureText="Ctrl+F"/>
+                </MenuItem>
             </Menu>
         </DockPanel>
-        <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}">
+        <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding DatabaseView, Mode=TwoWay}"
+                  CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" SelectedItem="{Binding SelectedRow, Mode=TwoWay}" >
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Add Row" Click="AddRowClick"/>
-                    <MenuItem Header="Delete Selected Row" Click="DeleteRowClick"/>
+                    <MenuItem Header="Add Row" Command="{Binding AddRowCommand}" InputGestureText="Ctrl+R"/>
+                    <MenuItem Header="Delete Selected Row" Command="{Binding DeleteRowCommand}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
