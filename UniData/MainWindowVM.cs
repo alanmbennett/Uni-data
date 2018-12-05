@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace UniData
 {
-    class MainWindowVM : INotifyPropertyChanged
+    public class MainWindowVM : INotifyPropertyChanged
     {
         private string FileFilter = "XML Files(*.xml)|*.xml";
         private SaveFileDialog SaveDialog;
@@ -76,7 +76,7 @@ namespace UniData
             }
         }
 
-        private List<string> Columns;
+        public List<string> Columns;
 
         public MainWindowVM(UserAccount user)
         {
@@ -467,6 +467,48 @@ namespace UniData
             LoginWindow loginWin = new LoginWindow(User.Username);
             MainWin.Close();
             loginWin.ShowDialog();
+        }
+
+        DelegateCommand _massDeleteEvent;
+        public ICommand MassDeleteCommand
+        {
+            get
+            {
+                if (_massDeleteEvent == null)
+                {
+                    _massDeleteEvent = new DelegateCommand(MassDeleteClick);
+                }
+
+                return _massDeleteEvent;
+            }
+        }
+
+        private void MassDeleteClick(object sender)
+        {
+            MassDeleteWindow massDelWin = new MassDeleteWindow();
+            MassDeleteWindowVM massDelWinVM = new MassDeleteWindowVM(Columns, massDelWin);
+            massDelWin.DataContext = massDelWinVM;
+            massDelWin.ShowDialog();
+
+            if (massDelWinVM.cancel != true)
+            {
+                List<DataRow> toDelete = new List<DataRow>();
+                foreach (DataRow row in Database.Rows)
+                {
+                    if (row[massDelWinVM.SelectedColumn].ToString() == massDelWinVM.ToDelete)
+                    {
+                        toDelete.Add(row);
+                    }
+                }
+
+                foreach(DataRow row in toDelete)
+                {
+                    DeleteRow(row);
+                }
+
+                DBRefresh();
+                MessageBox.Show($"{toDelete.Count} rows matching the specified criteria were deleted.", "Mass Delete Sucessful!");
+            }
         }
 
         private void DBRefresh()

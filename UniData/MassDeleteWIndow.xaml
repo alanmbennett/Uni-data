@@ -1,0 +1,23 @@
+﻿<Window x:Class="UniData.MassDeleteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UniData"
+        mc:Ignorable="d"
+        Title="Mass Delete A Value" Height="160" Width="550">
+    <StackPanel Orientation="Vertical">
+        <!-- Column name combobox -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label x:Name="TextboxLabel" Content="Column to Delete From" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+            <ComboBox x:Name="ColumnCombobox" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="100" Margin="20" Visibility="Visible" ItemsSource="{Binding Columns}" SelectedItem="{Binding SelectedColumn}"/>
+            <Label Content="Mass Delete by Value: " VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold"/>
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Text="{Binding ToDelete}"/>
+        </StackPanel>
+    <!-- Error msg and buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="DeleteButton" Content="Mass Delete" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Height="30" Width="100" Command="{Binding DeleteCommand}"/>
+            <Button x:Name="CancelButton" Content="Cancel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20" Height="30" Width="100" Command="{Binding CancelCommand}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
