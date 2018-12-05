@@ -110,7 +110,7 @@ namespace UniData
 						if (database.Select().Where(x => x[Selection1Combo.SelectedIndex].ToString() == BoxA).Count() > 0)
 						{
 							//find the items and set the data context
-							search = database.Select().Where(x => x[Selection1Combo.SelectedIndex].ToString() == BoxB).CopyToDataTable();
+							search = database.Select().Where(x => x[Selection1Combo.SelectedIndex].ToString() == BoxA).CopyToDataTable();
 							DatabaseGrid.DataContext = search.DefaultView;
 						}
 						else
