@@ -43,6 +43,7 @@
                 <MenuItem Header="File">
                     <MenuItem Header="New Database" Command="{Binding CreateDatabaseCommand}" InputGestureText="Ctrl+N"/>
                     <MenuItem Header="Load Existing Database" Command="{Binding LoadDatabaseCommand}" InputGestureText="Ctrl+O"/>
+                    <MenuItem Header="Save Database As" Command="{Binding SaveAsCommand}"/>
                     <MenuItem Header="Save Database" Command="{Binding SaveDatabaseCommand}" InputGestureText="Ctrl+S"/>
                 </MenuItem>
                 <MenuItem Header="Edit">
@@ -57,7 +58,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding Database, Mode=TwoWay}"
+        <DataGrid x:Name="DatabaseGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding DatabaseView, Mode=TwoWay}"
                   CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" SelectedItem="{Binding SelectedRow, Mode=TwoWay}" >
             <DataGrid.ContextMenu>
                 <ContextMenu>

@@ -84,8 +84,11 @@ namespace UniData
             User = user;
             DbName = "Blank Database";
 
-            if(Database == null)
+            if (Database == null)
+            {
                 Database = new DataTable();
+                DatabaseView = new DataView(Database);
+            }
 
             Columns = new List<string>();
         }
@@ -96,6 +99,7 @@ namespace UniData
             DataSet dataset = new DataSet();
             dataset.ReadXml(loadPath, XmlReadMode.ReadSchema);
             Database = dataset.Tables[0];
+            DatabaseView = new DataView(Database);
 
             DbName = loadPath;
 
@@ -154,7 +158,7 @@ namespace UniData
             if (!createWin.cancelClicked && !string.IsNullOrEmpty(createWin.DatabaseNameTextBox.Text))
             { 
                /* Save new intiail database to a XML file and open it up in a brand new window*/
-               SaveDatabase(createWin.DatabaseNameTextBox.Text);
+               SaveDatabase(createWin.DatabaseNameTextBox.Text, new SaveFileDialog());
                MainWindow mw = new MainWindow(User);
                mw.Title = SaveDialog.FileName;
                MainWin.Close();
@@ -176,14 +180,41 @@ namespace UniData
             }
         }
 
+        DelegateCommand _saveAsEvent;
+        public ICommand SaveAsCommand
+        {
+            get
+            {
+                if (_saveAsEvent == null)
+                {
+                    _saveAsEvent = new DelegateCommand(SaveAsClick);
+                }
+
+                return _saveAsEvent;
+            }
+        }
+
+        private void SaveAsClick(object sender)
+        {
+            SaveDatabase(null, new SaveFileDialog());
+        }
+
         private void SaveDatabaseClick(object sender)
         {
-            SaveDatabase();
+            SaveDatabase(DbName);
         }
 
         public void SaveDatabase(string name = null)
         {
-            SaveDialog = new SaveFileDialog();
+            Database.TableName = name;
+            DbName = Database.TableName;
+            Database.WriteXml(Database.TableName, XmlWriteMode.WriteSchema);
+            MessageBox.Show("Your changes have been saved.", $"{DbName} Successfully Saved!");
+        }
+
+        public void SaveDatabase(string name, SaveFileDialog saveDialog)
+        {
+            SaveDialog = saveDialog;
             SaveDialog.Filter = FileFilter;
             SaveDialog.Title = "Save a Database";
             SaveDialog.FileOk += SaveDialogFileOK; // set event handler to FileOK event
@@ -203,9 +234,7 @@ namespace UniData
 
         private void SaveDialogFileOK(object sender, CancelEventArgs e)
         {
-            Database.TableName = SaveDialog.FileName;
-            DbName = Database.TableName;
-            Database.WriteXml(Database.TableName, XmlWriteMode.WriteSchema); // will write database to XML file specified in SaveFileDialog
+            SaveDatabase(SaveDialog.FileName);
         }
 
         /* Method: LoadDialogFileOK
