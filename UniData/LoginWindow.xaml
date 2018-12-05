@@ -20,7 +20,7 @@
 
         <!-- Username field -->
         <Label Content="Username: " FontSize="12pt" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="UsernameTextBox" FontSize="12pt" Grid.Column="1" Grid.Row="0" Width="auto" Height="30px" Margin="20px" />
+        <TextBox Text="{Binding Username}" FontSize="12pt" Grid.Column="1" Grid.Row="0" Width="auto" Height="30px" Margin="20px" />
 
         <!-- Password field -->
         <Label Content="Password: " FontSize="12pt" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>

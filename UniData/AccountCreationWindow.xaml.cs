@@ -14,22 +14,73 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
 using System.Net.Mail;
+using System.ComponentModel;
 
 namespace UniData
 {
     /// <summary>
     /// Interaction logic for AccountCreationWindow.xaml
     /// </summary>
-    public partial class AccountCreationWindow : Window
+    public partial class AccountCreationWindow : Window, INotifyPropertyChanged
     {
 		private const string userFilePath = "login.xml";
 		private XmlSerializer Serializer = new XmlSerializer(typeof(List<UserAccount>));
 		private List<UserAccount> userList;
 
+
+
+		public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+
+		private string _username;
+		public string Username
+		{
+			get { return _username; }
+			set
+			{
+				_username = value;
+				PropertyChanged(this, new PropertyChangedEventArgs("Username"));
+			}
+		}
+
+		private string _irstName;
+		public string FirstName
+		{
+			get { return _irstName; }
+			set
+			{
+				_irstName = value;
+				PropertyChanged(this, new PropertyChangedEventArgs("FirstName"));
+			}
+		}
+
+		private string _lastName;
+		public string LastName
+		{
+			get { return _lastName; }
+			set
+			{
+				_lastName = value;
+				PropertyChanged(this, new PropertyChangedEventArgs("LastName"));
+			}
+		}
+
+		private string _email;
+		public string Email
+		{
+			get { return _email; }
+			set
+			{
+				_email = value;
+				PropertyChanged(this, new PropertyChangedEventArgs("Email"));
+			}
+		}
+
 		public AccountCreationWindow(List<UserAccount> userAccounts)
         {
             InitializeComponent();
 			userList = userAccounts;
+			DataContext =  this;
         }
 		//write the account info to the login.xml
 		private void WriteFile()
@@ -52,7 +103,7 @@ namespace UniData
 			if (InputValidation())
 			{
 				//create user and exit
-				userList.Add(new UserAccount(FirstNameTextBox.Text, LastNameTextBox.Text, UsernameTextBox.Text, EmailTextBox.Text, UserPasswordBox.Password));
+				userList.Add(new UserAccount(FirstName, LastName, Username, Email, UserPasswordBox.Password));
 				WriteFile();
 				this.Close();
 			}
@@ -70,11 +121,11 @@ namespace UniData
 
 			//column one
 			//user name
-			if (string.IsNullOrWhiteSpace(UsernameTextBox.Text))
+			if (string.IsNullOrWhiteSpace(Username))
 			{
 				output = false;
 				UsernameErrorMsg.Visibility = Visibility.Visible;
-			}else if (userList.Any(x => x.Username == UsernameTextBox.Text))//Checks if the user already exists
+			}else if (userList.Any(x => x.Username == Username))//Checks if the user already exists
 			{
 				//check if user accounnt exists already
 				output = false;
@@ -100,13 +151,13 @@ namespace UniData
 			}
 			//column two
 			//first name check
-			if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text))
+			if (string.IsNullOrWhiteSpace(FirstName))
 			{
 				output = false;
 				FirstNameErrorMsg.Visibility = Visibility.Visible;
 			}
 			//last name check
-			if (string.IsNullOrWhiteSpace(LastNameTextBox.Text))
+			if (string.IsNullOrWhiteSpace(LastName))
 			{
 				output = false;
 				LastNameErrorMsg.Visibility = Visibility.Visible;
@@ -114,7 +165,7 @@ namespace UniData
 			//email check
 			try
 			{
-				MailAddress t = new MailAddress(EmailTextBox.Text);
+				MailAddress t = new MailAddress(Email);
 			}
 			catch{
 				output = false;
