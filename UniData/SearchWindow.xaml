@@ -27,12 +27,12 @@
 		<!--Search criteria 1-->
 		<Label Content="Criteria 1" Grid.Row="0" Grid.Column="0"  />
 		<ComboBox x:Name="Selection1Combo" Grid.Row="0" Grid.Column="1" Width="150" Height="35"/>
-		<TextBox x:Name="Selection1TextBox" Grid.Row="0" Grid.Column="2" Width="120" Height="35"/>
+		<TextBox Text="{Binding BoxA}" Grid.Row="0" Grid.Column="2" Width="120" Height="35"/>
 
 		<!--Search Criteria 2-->
 		<Label Content="Criteria 2" Grid.Row="1" Grid.Column="0"/>
 		<ComboBox x:Name="Selection2Combo" Grid.Row="1" Grid.Column="1" Width="150" Height="35"/>
-		<TextBox x:Name="Selection2TextBox" Grid.Row="1" Grid.Column="2" Width="120" Height="35"/>
+		<TextBox Text="{Binding BoxB}" Grid.Row="1" Grid.Column="2" Width="120" Height="35"/>
 
 		<!--Data Display-->
 		<DataGrid x:Name="DatabaseGrid" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Height="auto" Width="auto" ItemsSource="{Binding}"/>
